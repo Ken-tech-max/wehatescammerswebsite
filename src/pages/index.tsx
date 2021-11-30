@@ -22,7 +22,6 @@ const Home = () => {
   const [imageIndex, setImageIndex] = useState(1);
 
   const {width, height} = useWindowSize();
-  const [activeFaqIndex, setActiveFaqIndex] = useState(-1);
 
   const mintRef = useRef(null);
   const aboutRef = useRef(null);
