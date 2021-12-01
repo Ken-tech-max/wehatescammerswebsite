@@ -142,8 +142,9 @@ const Home = () => {
                 KaijuKingz was spawned from the mind of CyberKongz holder and community member, OhDots, under his newly founded company: Augminted Labs. KaijuKingz hopes to expand its community with synergistic mechanics that foster competition and collaboration between Web3 communities. The collection will start with a mint of 3,333 Genesis Kaijuz, each granting its holder access to special perks and accesses. Genesis Kaijuz passively generate Radioactive Waste, which can be used to create Baby Kaijuz. Standing larger than life in a 69x69 pixel square, Kaijuz will have a wide variety of traits, types, and different aesthetics. Holding a Genesis Kaiju will reserve you a throne as a King of the Metaverse.
               </div>
             </div>
-            <div className="w-full md:w-1/2">
-              <img src={'/images/overview.png'} />
+            <div className="w-full md:w-1/2 relative">
+              <img src={'/images/overview.gif'} className="z-order-content" />
+              <div className="remove-watermark z-order-top"></div>
             </div>
           </div>          
         </div>

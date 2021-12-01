@@ -149,6 +149,15 @@ section {
   background-size: 100vw auto;
 }
 
+.remove-watermark {
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #030111;
+}
+
 .overview-title {
   font-size: 62px;
   font-style: italic;
