@@ -228,12 +228,12 @@ const Home = () => {
         <div className="w-full flex justify-center items-center px-5 md:px-10">
           <div className="w-full md:w-2/3 flex flex-col justify-center items-center">
             <h3 className="text-color-theme text-center presale-title drop-shadow-lg">JOIN OUR COMMUNITY</h3>
-            <div className="overview-desc-panel text-white p-10">
-              The KaijuKingz creed is to create, protect, and rule together. We aim to help in the development of Web3 and other creatives, focusing on the NFT ecosystem in particular. We hope to deliver life changing scholarships and development grants through our KaijuKingz DAO; created first and foremost by and for the KaijuKingz community to enrich the Web3 and creative landscape. See how you can help, or even participate as a scholarship applicant.
+            <div className="flex flex-col items-center justify-center p-10">
+              <p className="overview-desc-panel text-white">The KaijuKingz creed is to create, protect, and rule together. We aim to help in the development of Web3 and other creatives, focusing on the NFT ecosystem in particular. We hope to deliver life changing scholarships and development grants through our KaijuKingz DAO; created first and foremost by and for the KaijuKingz community to enrich the Web3 and creative landscape. See how you can help, or even participate as a scholarship applicant.</p>
+              <a href="https://discord.gg/gorilla" target="_blank">
+                <button className="button-connect my-5">JOIN OUR DISCORD</button>
+              </a>
             </div>
-            <a href="https://discord.gg/gorilla" target="_blank">
-              <button className="button-connect my-5">JOIN OUR DISCORD</button>
-            </a>
           </div>
         </div>
       </section>
