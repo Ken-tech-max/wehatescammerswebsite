@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return <div className="flex bg-black justify-center py-10">
     <div className="flex flex-col space-y-3">
       <div className="w-full flex justify-center items-center">
-        <img src={'/images/logo.png'} width={200} />
+        <Link href="/"><img src={'/images/logo.png'} width={200} className="cursor-pointer" /></Link>
       </div>
 
       <div className="grid grid-cols-3 gap-6 px-10">

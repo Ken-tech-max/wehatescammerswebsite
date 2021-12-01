@@ -10,7 +10,6 @@ import Countdown from 'react-countdown';
 import usePresale from '../hooks/use-presale';
 import toast from 'react-hot-toast';
 import { useWindowSize } from '../hooks/use-window-size';
-import { useLocalStorage } from '@solana/wallet-adapter-react';
 
 const Home = () => {
   const wallet = useWallet();
@@ -26,7 +25,7 @@ const Home = () => {
   const mintRef = useRef(null);
   const aboutRef = useRef(null);
   const teamRef = useRef(null);
-  const rwasteRef = useRef(null);
+  const opsRef = useRef(null);
 
   useEffect(() => {
     const timer=setTimeout(() => {
@@ -48,7 +47,7 @@ const Home = () => {
         <link rel="icon" href="/icon.png" />
       </Head>
 
-      <Header mintRef={mintRef} aboutRef={aboutRef} teamRef={teamRef} rwasteRef={rwasteRef} />
+      <Header mintRef={mintRef} aboutRef={aboutRef} teamRef={teamRef} opsRef={opsRef} />
 
       {(width > 768) ?
       <section>
@@ -128,7 +127,7 @@ const Home = () => {
               }
             </div>
           </div>
-          <div className="flex justify-center items-center border border-red-600">
+          <div className="flex justify-center items-center border-2 border-green-600">
             <img src={`/images/art${imageIndex}.png`} width={200} />
           </div>
         </div>
@@ -150,34 +149,54 @@ const Home = () => {
         </div>
       </section>
 
-      <section ref={rwasteRef}>
-        <h5 className="text-color-theme presale-title drop-shadow-lg text-center pb-10">POST LAUNCH SCHEDULE</h5>
+      <section ref={opsRef}>
+        <h5 className="text-color-theme presale-title drop-shadow-lg text-center pb-10">Gorilla Ops</h5>
         <div className="w-full flex flex-col px-5 md:px-10 justify-center items-center">
           <div className="phase-panel w-full md:w-5/6">
-            <div className="phase">
-              <h5 className="text-color-theme presale-title">
-                PHASE 1
+            <div className="my-10">
+              <h5 className="text-color-theme presale-desc mb-5">
+                25% - GorillaGalaxyGenesisGiveaway
               </h5>
               <p className="text-white overview-desc">
-                Feast your eyes on some of the rarest KaijuKingz in the collection: the Legendary Kaijuz. Only 10 of these mythical beasts exist, and they are all unique 1/1 special edition Kaijuz with animations exclusive to them. One Legendary Kaiju, the Mecha Kaiju, was exclusively auctioned off, only allowing holders of N0XSCAPE Founders Cards to participate in the auction. Another one of these special Legends was tucked away in the initial mint of KaijuKingz for one lucky degen to find. After all KaijuKingz were minted, the final 8 were auctioned off.
+                5x 5 SOL giveaway back to the minters of the first 25% of the collection. (All numbers 1-1111 are entered to win.)
               </p>
             </div>
 
-            <div className="phase">
-              <h5 className="text-color-theme presale-title">
-                PHASE 2
+            <div className="my-10">
+              <h5 className="text-color-theme presale-desc mb-5">
+                50% - Chimp Change
               </h5>
               <p className="text-white overview-desc">
-                Feast your eyes on some of the rarest KaijuKingz in the collection: the Legendary Kaijuz. Only 10 of these mythical beasts exist, and they are all unique 1/1 special edition Kaijuz with animations exclusive to them. One Legendary Kaiju, the Mecha Kaiju, was exclusively auctioned off, only allowing holders of N0XSCAPE Founders Cards to participate in the auction. Another one of these special Legends was tucked away in the initial mint of KaijuKingz for one lucky degen to find. After all KaijuKingz were minted, the final 8 were auctioned off.
+                250 SOL is added to the community wallet. The community wallet will be used for various purposes decided by Gorilla Galaxy: Genesis holders. 
               </p>
             </div>
 
-            <div className="phase">
-              <h5 className="text-color-theme presale-title">
-                PHASE 3
+            <div className="my-10">
+              <h5 className="text-color-theme presale-desc mb-5">
+                75% - $GLUE
               </h5>
               <p className="text-white overview-desc">
-                Feast your eyes on some of the rarest KaijuKingz in the collection: the Legendary Kaijuz. Only 10 of these mythical beasts exist, and they are all unique 1/1 special edition Kaijuz with animations exclusive to them. One Legendary Kaiju, the Mecha Kaiju, was exclusively auctioned off, only allowing holders of N0XSCAPE Founders Cards to participate in the auction. Another one of these special Legends was tucked away in the initial mint of KaijuKingz for one lucky degen to find. After all KaijuKingz were minted, the final 8 were auctioned off.
+                $GLUE token research and integration begins. This will be distributed to all Gorilla Galaxy: Genesis holders. Details TBA.
+              </p>
+            </div>
+
+            <div className="my-10">
+              <h5 className="text-color-theme presale-desc mb-5">
+                100% - Enter the Gorillaverse
+              </h5>
+              <p className="text-white overview-desc">
+                3D versions of all Genesis Gorillas will begin to roll out. These will be claimable with the $GLUE token.
+              </p>
+            </div>
+
+            <div className="my-10">
+              <p className="text-white overview-desc">
+                <br />
+                <br />
+                We aim to have these models available for Solana metaverse integration when it is available.
+                <br />
+                <br />
+                Roadmap 2.0 is released.
               </p>
             </div>
           </div>
@@ -189,8 +208,8 @@ const Home = () => {
         <div className="w-full flex justify-center items-center">
           <div className="w-full md:w-5/6 grid grid-cols-1 md:grid-cols-3 gap-8 px-5 md:px-10">
             <div className="flex flex-col justify-center items-center">
-              <img src={'/images/team1.png'} />
-              <div className="flex flex-row justify-center items-center space-x-4">
+              <img src={'/images/team1.png'} width={'80%'} />
+              <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center presale-title">LEADER</h5>
                 <a href="https://twitter.com/leader" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
@@ -200,8 +219,8 @@ const Home = () => {
             </div>
 
             <div className="flex flex-col justify-center items-center">
-              <img src={'/images/team2.png'} />
-              <div className="flex flex-row justify-center items-center space-x-4">
+              <img src={'/images/team2.png'} width={'80%'} />
+              <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center presale-title">ARTIST</h5>
                 <a href="https://twitter.com/artist" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
@@ -211,8 +230,8 @@ const Home = () => {
             </div>
 
             <div className="flex flex-col justify-center items-center">
-              <img src={'/images/team3.png'} />
-              <div className="flex flex-row justify-center items-center space-x-4">
+              <img src={'/images/team3.png'} width={'80%'} />
+              <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center presale-title">FUNDER</h5>
                 <a href="https://twitter.com/funder" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
@@ -231,7 +250,7 @@ const Home = () => {
             <div className="overview-desc-panel flex flex-col items-center justify-center p-10">
               <p className="text-white">The KaijuKingz creed is to create, protect, and rule together. We aim to help in the development of Web3 and other creatives, focusing on the NFT ecosystem in particular. We hope to deliver life changing scholarships and development grants through our KaijuKingz DAO; created first and foremost by and for the KaijuKingz community to enrich the Web3 and creative landscape. See how you can help, or even participate as a scholarship applicant.</p>
               <a href="https://discord.gg/gorilla" target="_blank">
-                <button className="button-connect my-5">JOIN OUR DISCORD</button>
+                <button className="button-connect mt-10">JOIN OUR DISCORD</button>
               </a>
             </div>
           </div>
@@ -248,7 +267,7 @@ const Home = () => {
               rounded-full
               h-32
               w-32
-              border-t-2 border-b-2 border-red-600
+              border-t-2 border-b-2 border-green-600
             "
           ></div>
         </div>

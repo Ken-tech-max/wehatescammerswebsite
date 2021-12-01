@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useWindowSize } from '../hooks/use-window-size';
 import { useLocalStorage } from '@solana/wallet-adapter-react';
 
-const Header = ({mintRef, aboutRef, teamRef, rwasteRef}: any) => {
+const Header = ({mintRef, aboutRef, teamRef, opsRef}: any) => {
 
   const {width, height} = useWindowSize();
 
@@ -48,8 +48,8 @@ const Header = ({mintRef, aboutRef, teamRef, rwasteRef}: any) => {
             <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(teamRef, 'TEAM')} >
               TEAM
             </button>
-            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(rwasteRef, 'RWASTE')} >
-              RWASTE
+            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(opsRef, 'OPS')} >
+              OPs
             </button>
           </div>
           <WalletMultiButton className="button-connect" />
@@ -76,8 +76,8 @@ const Header = ({mintRef, aboutRef, teamRef, rwasteRef}: any) => {
         <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(teamRef, 'TEAM')} >
           TEAM
         </button>
-        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(rwasteRef, 'RWASTE')} >
-          RWASTE
+        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(opsRef, 'OPS')} >
+          OPs
         </button>
 
         <div className="grid grid-cols-7 gap-6 pt-5">
