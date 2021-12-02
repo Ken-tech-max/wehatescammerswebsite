@@ -156,10 +156,10 @@ const Home = () => {
           <div className="phase-panel w-full md:w-5/6">
             <div className="my-10">
               <h5 className="text-color-theme presale-desc mb-5">
-                25% - GorillaGalaxyGenesisGiveaway
+                25% - GGG Giveaway
               </h5>
               <p className="text-white overview-desc">
-                5x 5 SOL giveaway back to the minters of the first 25% of the collection. (All numbers 1-1111 are entered to win.)
+                10x 5 SOL giveaway back to the minters of the collection.
               </p>
             </div>
 
@@ -197,7 +197,7 @@ const Home = () => {
                 We aim to have these models available for Solana metaverse integration when it is available.
                 <br />
                 <br />
-                Roadmap 2.0 is released.
+                More to come with Gorilla Ops v2.0....
               </p>
             </div>
           </div>
