@@ -55,13 +55,7 @@ const Home = () => {
           <div>
             <h3 className="text-color-theme text-center overview-title drop-shadow-lg">GORILLA GALAXY</h3>
             <p className="text-white text-center overview-desc px-5 md:px-24">
-              Genesis is a collection of 4444 unique, randomly generated Gorillas roaming on the Solana blockchain. 
-              <br />
-              <br />
-              Every Genesis Gorilla is unique and programmatically generated from over 130+ possible attributes and traits like background, fur, clothes, mouth, head, earrings and eyes. Some gorillas will be rarer than others. 
-              <br />
-              <br />
-              Owning a gorilla isn't just a cool picture. It is your ticket into our ecosystem, bringing you value in the real and digital world.
+              
             </p>
           </div>
         </div>
@@ -74,13 +68,7 @@ const Home = () => {
         <div className="">
           <h3 className="text-color-theme text-center overview-title drop-shadow-lg">GORILLA GALAXY</h3>
           <p className="text-white text-center overview-desc px-5 md:px-24">
-            Genesis is a collection of 4444 unique, randomly generated Gorillas roaming on the Solana blockchain. 
-            <br />
-            <br />
-            Every Genesis Gorilla is unique and programmatically generated from over 130+ possible attributes and traits like background, fur, clothes, mouth, head, earrings and eyes. Some gorillas will be rarer than others. 
-            <br />
-            <br />
-            Owning a gorilla isn't just a cool picture. It is your ticket into our ecosystem, bringing you value in the real and digital world.
+            
           </p>
         </div>
       </section>
@@ -149,9 +137,15 @@ const Home = () => {
         <div className="w-full flex justify-center items-center relative px-5 md:px-10">
           <div className="flex flex-col md:flex-row justify-center items-center space-x-5">
             <div className="w-full md:w-1/2 flex flex-col justify-center items-center">
-              <h3 className="text-white text-center overview-title drop-shadow-lg">GORILLAS</h3>
+              <h3 className="text-white text-center overview-title drop-shadow-lg">Genesis</h3>
               <div className="overview-desc-panel text-white p-5">
-                KaijuKingz was spawned from the mind of CyberKongz holder and community member, OhDots, under his newly founded company: Augminted Labs. KaijuKingz hopes to expand its community with synergistic mechanics that foster competition and collaboration between Web3 communities. The collection will start with a mint of 3,333 Genesis Kaijuz, each granting its holder access to special perks and accesses. Genesis Kaijuz passively generate Radioactive Waste, which can be used to create Baby Kaijuz. Standing larger than life in a 69x69 pixel square, Kaijuz will have a wide variety of traits, types, and different aesthetics. Holding a Genesis Kaiju will reserve you a throne as a King of the Metaverse.
+                Gorilla Galaxy: Genesis is a collection of 4444 unique, randomly generated Gorillas roaming on the Solana blockchain. 
+                <br />
+                <br />
+                Every Genesis Gorilla is unique and programmatically generated from over 130+ possible attributes and traits like background, fur, clothes, mouth, head, earrings and eyes. Some gorillas will be rarer than others. 
+                <br />
+                <br />
+                Owning a gorilla isn't just a cool picture. It is your ticket into our ecosystem, bringing you value in the real and digital world.
               </div>
             </div>
             <div className="w-full md:w-1/2 relative">
