@@ -25,7 +25,7 @@ const Home = () => {
   const mintRef = useRef(null);
   const aboutRef = useRef(null);
   const teamRef = useRef(null);
-  const opsRef = useRef(null);
+  const roadmapRef = useRef(null);
 
   useEffect(() => {
     const timer=setTimeout(() => {
@@ -43,11 +43,11 @@ const Home = () => {
 
       <Head>
         <title>Gorilla Galaxy</title>
-        <meta name="description" content="You can purchase Gorilla." />
+        <meta name="description" content="Genesis is a collection of 4444 unique, randomly generated Gorillas roaming on the Solana blockchain." />
         <link rel="icon" href="/icon.png" />
       </Head>
 
-      <Header mintRef={mintRef} aboutRef={aboutRef} teamRef={teamRef} opsRef={opsRef} />
+      <Header mintRef={mintRef} aboutRef={aboutRef} teamRef={teamRef} roadmapRef={roadmapRef} />
 
       <section>
         <div className="w-full flex justify-center items-center">
@@ -60,7 +60,7 @@ const Home = () => {
       </section>
 
       <section ref={mintRef}>
-        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">PURCHASE GORILLA</h3>
+        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Genesis</h3>
         <div className="flex flex-row justify-center items-center space-x-10 px-5">
           <div className="flex flex-col justify-center items-center space-y-3">
 
@@ -141,7 +141,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section ref={opsRef}>
+      <section ref={roadmapRef}>
         <h5 className="text-color-theme presale-title drop-shadow-lg text-center pb-10">Gorilla Ops</h5>
         <div className="w-full flex flex-col px-5 md:px-10 justify-center items-center">
           <div className="phase-panel w-full md:w-5/6">

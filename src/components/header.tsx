@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useWindowSize } from '../hooks/use-window-size';
 import { useLocalStorage } from '@solana/wallet-adapter-react';
 
-const Header = ({mintRef, aboutRef, teamRef, opsRef}: any) => {
+const Header = ({mintRef, aboutRef, teamRef, roadmapRef}: any) => {
 
   const {width, height} = useWindowSize();
 
@@ -31,7 +31,7 @@ const Header = ({mintRef, aboutRef, teamRef, opsRef}: any) => {
     if (width <= 1280) handleClickMenu();
   }
 
-  return <div className="theme-header theme-bg-color md:px-10 w-full">
+  return <div className="theme-header md:px-10 w-full">
     <div className="w-full flex flex-row justify-center items-center md:space-x-8">
       <div className="pl-3 md:pl-0">
         <Link href="/"><img src={'/images/logo.png'} width={(width > 768) ? '100px' : '70px'} className="cursor-pointer" /></Link>
@@ -48,8 +48,8 @@ const Header = ({mintRef, aboutRef, teamRef, opsRef}: any) => {
             <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(teamRef, 'TEAM')} >
               TEAM
             </button>
-            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(opsRef, 'OPS')} >
-              OPs
+            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(roadmapRef, 'ROADMAP')} >
+              ROADMAP
             </button>
           </div>
           <WalletMultiButton className="button-connect" />
@@ -76,8 +76,8 @@ const Header = ({mintRef, aboutRef, teamRef, opsRef}: any) => {
         <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(teamRef, 'TEAM')} >
           TEAM
         </button>
-        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(opsRef, 'OPS')} >
-          OPs
+        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(roadmapRef, 'ROADMAP')} >
+          ROADMAP
         </button>
 
         <div className="grid grid-cols-7 gap-6 pt-5">
