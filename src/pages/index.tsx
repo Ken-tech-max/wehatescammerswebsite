@@ -49,30 +49,15 @@ const Home = () => {
 
       <Header mintRef={mintRef} aboutRef={aboutRef} teamRef={teamRef} opsRef={opsRef} />
 
-      {(width > 768) ?
-      <section>
-        <div className="w-full md:h-screen flex justify-center items-end background-overview-section">
-          <div>
-            <h3 className="text-color-theme text-center overview-title drop-shadow-lg">GORILLA GALAXY</h3>
-            <p className="text-white text-center overview-desc px-5 md:px-24">
-              
-            </p>
-          </div>
-        </div>
-      </section>
-      :
       <section>
         <div className="w-full flex justify-center items-center">
           <img src={'/images/background.png'} width="100%" />
         </div>
         <div className="">
-          <h3 className="text-color-theme text-center overview-title drop-shadow-lg">GORILLA GALAXY</h3>
-          <p className="text-white text-center overview-desc px-5 md:px-24">
-            
-          </p>
+          <h3 className="text-color-theme text-center overview-title drop-shadow-lg"></h3>
+          <p className="text-white text-center overview-desc px-5 md:px-24"></p>
         </div>
       </section>
-      }
 
       <section ref={mintRef}>
         <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">PURCHASE GORILLA</h3>
