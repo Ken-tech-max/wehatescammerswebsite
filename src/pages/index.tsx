@@ -116,7 +116,7 @@ const Home = () => {
               }
             </div>
           </div>
-          <div className="flex justify-center items-center border-2 border-white">
+          <div className="flex justify-center items-center outer-glow">
             <img src={`/images/art${imageIndex}.png`} width={200} />
           </div>
         </div>
