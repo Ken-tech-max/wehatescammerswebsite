@@ -80,17 +80,14 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef}: any) => {
           ROADMAP
         </button>
 
-        <div className="grid grid-cols-7 gap-6 pt-5">
+        <div className="grid grid-cols-6 gap-6 pt-5">
           <div className="col-span-1"></div>
           <div className="col-span-1"></div>
-          <a href="https://mobile.twitter.com/gorilla" className="inline-flex text-center justify-center items-center">
+          <a href="https://twitter.com/GorillaGNFT" className="inline-flex text-center justify-center items-center">
             <img src={'/images/icon_twitter.png'} />
           </a>
           <a href="https://discord.com/invite/gorilla" className="inline-flex text-center justify-center items-center">
             <img src={'/images/icon_discord.png'} />
-          </a>
-          <a href="https://www.instagram.com/gorilla/" className="inline-flex text-center justify-center items-center">
-            <img src={'/images/icon_instagram.png'} />
           </a>
           <div className="col-span-1"></div>
           <div className="col-span-1"></div>

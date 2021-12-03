@@ -49,12 +49,12 @@ body,
 }
 
 .theme-header-link {
-  color: #5af494;
+  color: white;
   font-size: 18px;
 }
 
 .theme-header-link:hover {
-  color: white;
+  color: #5af494;
 }
 
 .theme-section-background {
@@ -117,12 +117,12 @@ section {
 }
 
 .header-menu-item {
-  border-bottom: solid 1px #444444;
+  border-bottom: solid 1px #969696;
   padding: 5px;
 }
 
 .phase-panel {
-  border-left: 2px solid #5af494;
+  border-left: 2px solid #74377a;
   padding-left: 30px;
 }
 
@@ -217,7 +217,7 @@ section {
 }
 
 .text-color-theme {
-  color: #5af494;
+  color: #74377a;
 }
 
 .text-timer-big {
