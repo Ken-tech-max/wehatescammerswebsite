@@ -41,7 +41,7 @@ body,
 }
 
 .theme-active-color {
-  color: #5af494;
+  color: white;
 }
 
 .theme-border-radius {
@@ -54,7 +54,7 @@ body,
 }
 
 .theme-header-link:hover {
-  color: #5af494;
+  color: rgb(192, 192, 192);
 }
 
 .theme-section-background {
@@ -93,9 +93,9 @@ section {
 /************************************** Header **************************/
 
 .button-connect {
-  color: #5af494 !important;
+  color: white !important;
   background: transparent !important;
-  border: 1px #5af494 solid !important;
+  border: 1px white solid !important;
   border-radius: 5px !important;
   font-size: 16px !important;
   font-weight: bold !important;
@@ -112,8 +112,8 @@ section {
 }
 
 .button-connect:hover {
-  background-color: #5af494 !important;
-  color: #04021C !important;
+  background-color: white !important;
+  color: #74377a !important;
 }
 
 .header-menu-item {
@@ -243,7 +243,7 @@ section {
 .loader {
   border: 5px solid transparent;
   border-radius: 50%;
-  border-top: 5px solid #5af494;
+  border-top: 5px solid white;
   width: 20px;
   height: 20px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
@@ -263,8 +263,8 @@ section {
 
 .input-number {
   background: transparent;
-  color: #5af494;
-  border: solid 1px #5af494 !important;
+  color: white;
+  border: solid 1px white !important;
   border-radius: 5px;
   text-align: center;
   width: 60%;

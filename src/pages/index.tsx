@@ -60,7 +60,7 @@ const Home = () => {
       </section>
 
       <section ref={mintRef}>
-        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Genesis</h3>
+        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Gorilla</h3>
         <div className="flex flex-row justify-center items-center space-x-10 px-5">
           <div className="flex flex-col justify-center items-center space-y-3">
 
@@ -75,7 +75,7 @@ const Home = () => {
 
             {wallet.connected &&
               <>
-                <p className="text-gray-800 font-bold text-lg cursor-default">Minted / Total: {nftsData.itemsRedeemed} / {nftsData.itemsAvailable}</p>
+                <p className="text-white font-bold text-lg cursor-default text-center">Minted / Total <br /> {nftsData.itemsRedeemed} / {nftsData.itemsAvailable}</p>
               </>
             }
 
@@ -116,7 +116,7 @@ const Home = () => {
               }
             </div>
           </div>
-          <div className="flex justify-center items-center border-2 border-green-600">
+          <div className="flex justify-center items-center border-2 border-white">
             <img src={`/images/art${imageIndex}.png`} width={200} />
           </div>
         </div>
@@ -263,7 +263,7 @@ const Home = () => {
               rounded-full
               h-32
               w-32
-              border-t-2 border-b-2 border-green-600
+              border-t-2 border-b-2 border-white
             "
           ></div>
         </div>
