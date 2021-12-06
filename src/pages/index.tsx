@@ -19,6 +19,7 @@ const Home = () => {
   const { isSoldOut, mintStartDate, isMinting, onMintNFT, nftsData } = useCandyMachine();
   const { isStatusLoading, mintStatus, currentHoldedCount, maxNFTHoldCount } = usePresale();
   const [imageIndex, setImageIndex] = useState(1);
+  const [activeFaqIndex, setActiveFaqIndex] = useState(-1);
 
   const {width, height} = useWindowSize();
 
@@ -26,6 +27,7 @@ const Home = () => {
   const aboutRef = useRef(null);
   const teamRef = useRef(null);
   const roadmapRef = useRef(null);
+  const faqRef = useRef(null);
 
   useEffect(() => {
     const timer=setTimeout(() => {
@@ -37,6 +39,14 @@ const Home = () => {
     return () => clearTimeout(timer);
   });
 
+  const handleFaq = (index: number) => {
+    if (index == activeFaqIndex) {
+        setActiveFaqIndex(-1);
+    } else {
+        setActiveFaqIndex(index);
+    }
+  }
+
   return (
     <main>
       <Toaster />
@@ -47,7 +57,7 @@ const Home = () => {
         <link rel="icon" href="/icon.png" />
       </Head>
 
-      <Header mintRef={mintRef} aboutRef={aboutRef} teamRef={teamRef} roadmapRef={roadmapRef} />
+      <Header mintRef={mintRef} aboutRef={aboutRef} teamRef={teamRef} roadmapRef={roadmapRef} faqRef={faqRef} />
 
       <section>
         <div className="w-full flex justify-center items-center">
@@ -146,7 +156,7 @@ const Home = () => {
       </section>
 
       <section ref={roadmapRef}>
-        <h5 className="text-color-theme presale-title drop-shadow-lg text-center pb-10">Gorilla Ops</h5>
+        <h5 className="text-white presale-title drop-shadow-lg text-center pb-10">Gorilla Ops</h5>
         <div className="w-full flex flex-col px-5 md:px-10 justify-center items-center">
           <div className="phase-panel w-full md:w-5/6">
             <div className="my-10">
@@ -199,6 +209,50 @@ const Home = () => {
         </div>
       </section>
 
+      <section ref={faqRef}>
+        <div className="w-full px-5 md:px-16 pb-10 relative">
+          <h3 className="text-color-theme presale-title pb-10 text-center">FAQ'S</h3>
+
+          <div className="panel-faq">
+            <div className={activeFaqIndex == 0 ? 'faq active-faq' : 'faq'}>
+                <div className='faq-header' onClick={() => handleFaq(0)}>
+                    <div>Blockchain?</div>
+                    <div className='faq-icon'>{activeFaqIndex == 0 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
+                </div>
+                <div className={activeFaqIndex == 0 ? 'active-faq-content' : 'faq-content'}><blockquote>Solana</blockquote></div>
+            </div>
+            <div className={activeFaqIndex == 1 ? 'faq active-faq' : 'faq'}>
+                <div className='faq-header' onClick={() => handleFaq(1)}>
+                    <div>Supply</div>
+                    <div className='faq-icon'>{activeFaqIndex == 1 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
+                </div>
+                <div className={activeFaqIndex == 1 ? 'active-faq-content' : 'faq-content'}><blockquote>The total supply of Genesis gorillas is 4,444.</blockquote></div>
+            </div>
+            <div className={activeFaqIndex == 2 ? 'faq active-faq' : 'faq'}>
+                <div className='faq-header' onClick={() => handleFaq(2)}>
+                    <div>When?</div>
+                    <div className='faq-icon'>{activeFaqIndex == 2 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
+                </div>
+                <div className={activeFaqIndex == 2 ? 'active-faq-content' : 'faq-content'}><blockquote>Minting date TBA</blockquote></div>
+            </div>
+            <div className={activeFaqIndex == 3 ? 'faq active-faq' : 'faq'}>
+                <div className='faq-header' onClick={() => handleFaq(3)}>
+                    <div>Mint price?</div>
+                    <div className='faq-icon'>{activeFaqIndex == 3 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
+                </div>
+                <div className={activeFaqIndex == 3 ? 'active-faq-content' : 'faq-content'}><blockquote>Genesis gorillas will cost 0.77 SOL each to mint.</blockquote></div>
+            </div>
+            <div className={activeFaqIndex == 4 ? 'faq active-faq' : 'faq'}>
+                <div className='faq-header' onClick={() => handleFaq(4)}>
+                    <div>Token?</div>
+                    <div className='faq-icon'>{activeFaqIndex == 4 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
+                </div>
+                <div className={activeFaqIndex == 4 ? 'active-faq-content' : 'faq-content'}><blockquote>The token name is $GLUE, this will be released after the collection is sold out. (1 TOKEN = 1 TOKEN)</blockquote></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section ref={teamRef}>
         <h3 className="text-white text-center overview-title drop-shadow-lg pb-10">GORILLA GALAXY TEAM</h3>
         <div className="w-full flex justify-center items-center">
@@ -209,9 +263,9 @@ const Home = () => {
               <img src={'/images/team1.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center team-title">GalaxyQueen</h5>
-                <a href="https://twitter.com/GalaxyQueen" target="_blank">
+                {/* <a href="https://twitter.com/GalaxyQueen" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
-                </a>
+                </a> */}
               </div>
               <p className="text-white text-center overview-desc">CO-FOUNDER</p>
             </div>
@@ -220,9 +274,9 @@ const Home = () => {
               <img src={'/images/team2.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center team-title">CDZ</h5>
-                <a href="https://twitter.com/CDZ" target="_blank">
+                {/* <a href="https://twitter.com/CDZ" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
-                </a>
+                </a> */}
               </div>
               <p className="text-white text-center overview-desc">CO-FOUNDER</p>
             </div>
@@ -237,7 +291,7 @@ const Home = () => {
           <div className="w-full md:w-2/3 flex flex-col justify-center items-center">
             <h3 className="text-color-theme text-center presale-title drop-shadow-lg">JOIN OUR COMMUNITY</h3>
             <div className="overview-desc-panel flex flex-col items-center justify-center p-10">
-              <p className="text-white">The KaijuKingz creed is to create, protect, and rule together. We aim to help in the development of Web3 and other creatives, focusing on the NFT ecosystem in particular. We hope to deliver life changing scholarships and development grants through our KaijuKingz DAO; created first and foremost by and for the KaijuKingz community to enrich the Web3 and creative landscape. See how you can help, or even participate as a scholarship applicant.</p>
+              <p className="text-white">Join the Gorilla Galaxy community and stay engaged in our Discord server or on Twitter.</p>
               <a href="https://discord.gg/gorilla" target="_blank">
                 <button className="button-connect mt-10">JOIN OUR DISCORD</button>
               </a>

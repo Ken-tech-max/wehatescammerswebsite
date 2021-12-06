@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useWindowSize } from '../hooks/use-window-size';
 import { useLocalStorage } from '@solana/wallet-adapter-react';
 
-const Header = ({mintRef, aboutRef, teamRef, roadmapRef}: any) => {
+const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
 
   const {width, height} = useWindowSize();
 
@@ -51,6 +51,9 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef}: any) => {
             <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(roadmapRef, 'ROADMAP')} >
               ROADMAP
             </button>
+            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(faqRef, 'FAQ')} >
+              FAQ
+            </button>
           </div>
           <WalletMultiButton className="button-connect" />
         </>
@@ -78,6 +81,9 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef}: any) => {
         </button>
         <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(roadmapRef, 'ROADMAP')} >
           ROADMAP
+        </button>
+        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(faqRef, 'FAQ')} >
+          FAQ
         </button>
 
         <div className="grid grid-cols-6 gap-6 pt-5">

@@ -282,3 +282,66 @@ section {
   text-align: center;
   width: 60%;
 }
+
+.panel-faq {
+  position: relative;
+  z-index: 1;
+}
+
+.faq {
+  background: transparent;
+  border-bottom: solid 1px #74377a;
+  color: white;
+  padding: 5px 10px;
+  z-index: 1;
+}
+
+.faq-header {
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  padding: 10px 0;
+  z-index: 1;
+}
+
+.faq-content {
+  display: none;
+  z-index: 1;
+}
+
+.faq-icon {
+  position: relative;
+  align-items: center;
+  flex: 1 auto;
+  display: flex;
+  justify-content: right;
+  z-index: 1;
+}
+
+.active-faq-content {
+  font-size: 24px;
+  padding: 10px 0;
+  display: block;
+  z-index: 1;
+  font-style: italic;
+}
+
+@media(max-width: 1280px) {
+  .faq-header {
+    font-size: 18px;
+  }
+
+  .active-faq-content {
+    font-size: 14px;
+  }
+}
+
+blockquote::before {
+  content: open-quote;
+}
+blockquote::after {
+  content: close-quote;
+}
+blockquote {
+  quotes: "“" "”" "‘" "’";
+}
