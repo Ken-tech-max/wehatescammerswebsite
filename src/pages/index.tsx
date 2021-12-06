@@ -212,7 +212,7 @@ const Home = () => {
 
       <section ref={faqRef}>
         <div className="w-full px-5 md:px-16 pb-10 relative">
-          <h3 className="text-color-theme presale-title pb-10 text-center">FAQ'S</h3>
+          <h3 className="text-color-theme presale-title pb-10 text-center">FAQ</h3>
 
           <div className="panel-faq">
             <div className={activeFaqIndex == 0 ? 'faq active-faq' : 'faq'}>
