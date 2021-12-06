@@ -224,7 +224,7 @@ const Home = () => {
             </div>
             <div className={activeFaqIndex == 1 ? 'faq active-faq' : 'faq'}>
                 <div className='faq-header' onClick={() => handleFaq(1)}>
-                    <div>Supply</div>
+                    <div>Supply?</div>
                     <div className='faq-icon'>{activeFaqIndex == 1 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
                 <div className={activeFaqIndex == 1 ? 'active-faq-content' : 'faq-content'}>The total supply of Genesis gorillas is 4,444.</div>
