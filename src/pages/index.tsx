@@ -10,6 +10,7 @@ import Countdown from 'react-countdown';
 import usePresale from '../hooks/use-presale';
 import toast from 'react-hot-toast';
 import { useWindowSize } from '../hooks/use-window-size';
+import Link from 'next/link';
 
 const Home = () => {
   const wallet = useWallet();
@@ -219,35 +220,35 @@ const Home = () => {
                     <div>Blockchain?</div>
                     <div className='faq-icon'>{activeFaqIndex == 0 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
-                <div className={activeFaqIndex == 0 ? 'active-faq-content' : 'faq-content'}><blockquote>Solana</blockquote></div>
+                <div className={activeFaqIndex == 0 ? 'active-faq-content' : 'faq-content'}>Solana</div>
             </div>
             <div className={activeFaqIndex == 1 ? 'faq active-faq' : 'faq'}>
                 <div className='faq-header' onClick={() => handleFaq(1)}>
                     <div>Supply</div>
                     <div className='faq-icon'>{activeFaqIndex == 1 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
-                <div className={activeFaqIndex == 1 ? 'active-faq-content' : 'faq-content'}><blockquote>The total supply of Genesis gorillas is 4,444.</blockquote></div>
+                <div className={activeFaqIndex == 1 ? 'active-faq-content' : 'faq-content'}>The total supply of Genesis gorillas is 4,444.</div>
             </div>
             <div className={activeFaqIndex == 2 ? 'faq active-faq' : 'faq'}>
                 <div className='faq-header' onClick={() => handleFaq(2)}>
                     <div>When?</div>
                     <div className='faq-icon'>{activeFaqIndex == 2 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
-                <div className={activeFaqIndex == 2 ? 'active-faq-content' : 'faq-content'}><blockquote>Minting date TBA</blockquote></div>
+                <div className={activeFaqIndex == 2 ? 'active-faq-content' : 'faq-content'}>Minting date TBA</div>
             </div>
             <div className={activeFaqIndex == 3 ? 'faq active-faq' : 'faq'}>
                 <div className='faq-header' onClick={() => handleFaq(3)}>
                     <div>Mint price?</div>
                     <div className='faq-icon'>{activeFaqIndex == 3 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
-                <div className={activeFaqIndex == 3 ? 'active-faq-content' : 'faq-content'}><blockquote>Genesis gorillas will cost 0.77 SOL each to mint.</blockquote></div>
+                <div className={activeFaqIndex == 3 ? 'active-faq-content' : 'faq-content'}>Genesis gorillas will cost 0.77 SOL each to mint.</div>
             </div>
             <div className={activeFaqIndex == 4 ? 'faq active-faq' : 'faq'}>
                 <div className='faq-header' onClick={() => handleFaq(4)}>
                     <div>Token?</div>
                     <div className='faq-icon'>{activeFaqIndex == 4 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
-                <div className={activeFaqIndex == 4 ? 'active-faq-content' : 'faq-content'}><blockquote>The token name is $GLUE, this will be released after the collection is sold out. (1 TOKEN = 1 TOKEN)</blockquote></div>
+                <div className={activeFaqIndex == 4 ? 'active-faq-content' : 'faq-content'}>The token name is $GLUE, this will be released after the collection is sold out. (1 TOKEN = 1 TOKEN)</div>
             </div>
           </div>
         </div>
@@ -289,11 +290,13 @@ const Home = () => {
       <section>
         <div className="w-full flex justify-center items-center px-5 md:px-10 mb-10">
           <div className="w-full md:w-2/3 flex flex-col justify-center items-center">
-            <h3 className="text-color-theme text-center presale-title drop-shadow-lg">JOIN OUR COMMUNITY</h3>
             <div className="overview-desc-panel flex flex-col items-center justify-center p-10">
-              <p className="text-white">Join the Gorilla Galaxy community and stay engaged in our Discord server or on Twitter.</p>
+              <h3 className="text-color-theme text-center presale-title drop-shadow-lg">JOIN OUR COMMUNITY</h3>
+              <div className="w-full flex justify-center items-center">
+                <Link href="/"><img src={'/images/logo.png'} width={200} className="cursor-pointer" /></Link>
+              </div>
               <a href="https://discord.gg/gorilla" target="_blank">
-                <button className="button-connect mt-10">JOIN OUR DISCORD</button>
+                <button className="button-connect">JOIN OUR DISCORD</button>
               </a>
             </div>
           </div>
