@@ -149,7 +149,7 @@ const Home = () => {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative">
-              <img src={'/images/overview.gif'} className="z-order-content" />
+              <img src={'/images/overview.png'} className="z-order-content" />
               <div className="remove-watermark z-order-top"></div>
             </div>
           </div>          
@@ -290,15 +290,13 @@ const Home = () => {
       <section>
         <div className="w-full flex justify-center items-center px-5 md:px-10 mb-10">
           <div className="w-full md:w-2/3 flex flex-col justify-center items-center">
-            <div className="overview-desc-panel flex flex-col items-center justify-center p-10">
-              <h3 className="text-color-theme text-center presale-title drop-shadow-lg">JOIN OUR COMMUNITY</h3>
-              <div className="w-full flex justify-center items-center">
-                <Link href="/"><img src={'/images/logo.png'} width={200} className="cursor-pointer" /></Link>
-              </div>
-              <a href="https://discord.gg/gorilla" target="_blank">
-                <button className="button-connect">JOIN OUR DISCORD</button>
-              </a>
+            <h3 className="text-color-theme text-center presale-title drop-shadow-lg">Community</h3>
+            <div className="w-full flex justify-center items-center">
+              <Link href="/"><img src={'/images/logo.png'} width={200} className="cursor-pointer" /></Link>
             </div>
+            <a href="https://discord.gg/gorilla" target="_blank">
+              <button className="button-connect">JOIN OUR DISCORD</button>
+            </a>
           </div>
         </div>
       </section>
