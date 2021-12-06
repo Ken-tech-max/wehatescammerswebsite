@@ -202,39 +202,32 @@ const Home = () => {
       <section ref={teamRef}>
         <h3 className="text-white text-center overview-title drop-shadow-lg pb-10">GORILLA GALAXY TEAM</h3>
         <div className="w-full flex justify-center items-center">
-          <div className="w-full md:w-5/6 grid grid-cols-1 md:grid-cols-3 gap-8 px-5 md:px-10">
-            <div className="flex flex-col justify-center items-center">
-              <img src={'/images/team1.png'} width={'80%'} />
+          <div className="w-full grid grid-cols-1 md:grid-cols-6 gap-8 px-5 md:px-10">
+            <div className="col-span-1"></div>
+
+            <div className="col-span-2 flex flex-col justify-center items-center">
+              <img src={'/images/team1.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5">
-                <h5 className="text-color-theme text-center presale-title">LEADER</h5>
-                <a href="https://twitter.com/leader" target="_blank">
+                <h5 className="text-color-theme text-center team-title">GalaxyQueen</h5>
+                <a href="https://twitter.com/GalaxyQueen" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
                 </a>
               </div>
-              <p className="text-white text-center overview-desc">LEAD DEVELOPERS</p>
+              <p className="text-white text-center overview-desc">CO-FOUNDER</p>
             </div>
 
-            <div className="flex flex-col justify-center items-center">
-              <img src={'/images/team2.png'} width={'80%'} />
+            <div className="col-span-2 flex flex-col justify-center items-center">
+              <img src={'/images/team2.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5">
-                <h5 className="text-color-theme text-center presale-title">ARTIST</h5>
-                <a href="https://twitter.com/artist" target="_blank">
+                <h5 className="text-color-theme text-center team-title">CDZ</h5>
+                <a href="https://twitter.com/CDZ" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
                 </a>
               </div>
-              <p className="text-white text-center overview-desc">ARTS CREATOR</p>
+              <p className="text-white text-center overview-desc">CO-FOUNDER</p>
             </div>
 
-            <div className="flex flex-col justify-center items-center">
-              <img src={'/images/team3.png'} width={'80%'} />
-              <div className="flex flex-row justify-center items-center space-x-4 mt-5">
-                <h5 className="text-color-theme text-center presale-title">FUNDER</h5>
-                <a href="https://twitter.com/funder" target="_blank">
-                  <img src={'/images/icon_twitter.png'} width={30} height={30} />
-                </a>
-              </div>
-              <p className="text-white text-center overview-desc">CO-FUNDER</p>
-            </div>
+            <div className="col-span-1"></div>
           </div>
         </div>
       </section>

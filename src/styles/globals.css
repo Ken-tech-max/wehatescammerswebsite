@@ -236,6 +236,13 @@ section {
   color: white;
 }
 
+.team-title {
+  font-size: 26px;
+  font-style: italic;
+  font-weight: bold;
+  font-family: 'Amiga';
+}
+
 @media(max-width: 1280px) {
   .text-timer-big {
     font-size: 32px;
