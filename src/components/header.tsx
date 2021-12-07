@@ -89,10 +89,10 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
         <div className="grid grid-cols-6 gap-6 pt-5">
           <div className="col-span-1"></div>
           <div className="col-span-1"></div>
-          <a href="https://twitter.com/GorillaGNFT" className="inline-flex text-center justify-center items-center">
+          <a href="https://twitter.com/cdz999" className="inline-flex text-center justify-center items-center">
             <img src={'/images/icon_twitter.png'} />
           </a>
-          <a href="https://discord.com/invite/gorilla" className="inline-flex text-center justify-center items-center">
+          <a href="https://discord.gg/YM6NKnVHsB" className="inline-flex text-center justify-center items-center">
             <img src={'/images/icon_discord.png'} />
           </a>
           <div className="col-span-1"></div>

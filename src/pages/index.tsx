@@ -264,7 +264,7 @@ const Home = () => {
               <img src={'/images/team1.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center team-title">GalaxyQueen</h5>
-                {/* <a href="https://twitter.com/GalaxyQueen" target="_blank">
+                {/* <a href="https://twitter.com/cdz999" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
                 </a> */}
               </div>
@@ -275,7 +275,7 @@ const Home = () => {
               <img src={'/images/team2.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center team-title">CDZ</h5>
-                {/* <a href="https://twitter.com/CDZ" target="_blank">
+                {/* <a href="https://twitter.com/cdz999" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
                 </a> */}
               </div>
@@ -294,7 +294,7 @@ const Home = () => {
             <div className="w-full flex justify-center items-center">
               <Link href="/"><img src={'/images/logo.png'} width={200} className="cursor-pointer" /></Link>
             </div>
-            <a href="https://discord.gg/gorilla" target="_blank">
+            <a href="https://discord.gg/YM6NKnVHsB" target="_blank">
               <button className="button-connect">JOIN OUR DISCORD</button>
             </a>
           </div>
