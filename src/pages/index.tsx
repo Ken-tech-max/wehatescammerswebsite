@@ -263,7 +263,7 @@ const Home = () => {
             <div className="col-span-2 flex flex-col justify-center items-center">
               <img src={'/images/team1.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5 mb-3">
-                <h5 className="text-color-theme text-center team-title">Non Fungibro</h5>
+                <h5 className="text-color-theme text-center team-title">Non-Fungibro</h5>
                 <a href="https://twitter.com/NonFungibro?s=21" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
                 </a>
