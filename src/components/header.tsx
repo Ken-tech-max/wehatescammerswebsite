@@ -39,28 +39,30 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
       {width > 1280 ?
         <>
           <div className="flex-grow flex flex-row space-x-16 items-center justify-center">
-            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(mintRef, 'MINT')} >
+            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" onClick={() => scrollTo(mintRef, 'MINT')} >
               MINT
             </button>
-            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(aboutRef, 'ABOUT')} >
+            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" onClick={() => scrollTo(aboutRef, 'ABOUT')} >
               ABOUT
             </button>
-            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(teamRef, 'TEAM')} >
+            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" onClick={() => scrollTo(teamRef, 'TEAM')} >
               TEAM
             </button>
-            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(roadmapRef, 'ROADMAP')} >
+            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" onClick={() => scrollTo(roadmapRef, 'ROADMAP')} >
               ROADMAP
             </button>
-            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none" onClick={() => scrollTo(faqRef, 'FAQ')} >
+            <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" onClick={() => scrollTo(faqRef, 'FAQ')} >
               FAQ
             </button>
           </div>
-          <WalletMultiButton className="button-connect" />
+          {/* <WalletMultiButton className="button-connect" disabled={true} /> */}
+          <button className="button-connect">Mint Soon</button>
         </>
         :
         <>
           <div className="flex-grow flex justify-center items-center">
-            <WalletMultiButton className="button-connect" />
+            {/* <WalletMultiButton className="button-connect" disabled={true} /> */}
+            <button className="button-connect">Mint Soon</button>
           </div>
           <button className="inline-flex justify-center items-center pr-3" onClick={handleClickMenu} >
             <img src={'/images/icon_menu.png'} width="35" />
@@ -70,19 +72,19 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
     </div>
     {isMenuShowed &&
       <div className="flex flex-col space-y-2 w-full theme-bg-color p-2">
-        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(mintRef, 'MINT')} >
+        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => scrollTo(mintRef, 'MINT')} >
           MINT
         </button>
-        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(aboutRef, 'ABOUT')} >
+        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => scrollTo(aboutRef, 'ABOUT')} >
           ABOUT
         </button>
-        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(teamRef, 'TEAM')} >
+        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => scrollTo(teamRef, 'TEAM')} >
           TEAM
         </button>
-        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(roadmapRef, 'ROADMAP')} >
+        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => scrollTo(roadmapRef, 'ROADMAP')} >
           ROADMAP
         </button>
-        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item" onClick={() => scrollTo(faqRef, 'FAQ')} >
+        <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => scrollTo(faqRef, 'FAQ')} >
           FAQ
         </button>
 

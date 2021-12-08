@@ -32,6 +32,10 @@ body,
 
 /****************************** Theme ***************************/
 
+.font-amiga {
+  font-family: 'Amiga';
+}
+
 .theme-bg-color {
   background-color: #74377a;
 }
