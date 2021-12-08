@@ -146,7 +146,7 @@ const Home = () => {
                 Every Genesis Gorilla is unique and programmatically generated from over 130+ possible attributes and traits like background, fur, clothes, mouth, head, earrings and eyes. Some gorillas will be rarer than others. 
                 <br />
                 <br />
-                Owning a gorilla isn't just a cool picture. It is your ticket into our ecosystem, bringing you value in the real and digital world.
+                Your genesis gorilla isn't just a cool picture. It is your ticket into our ecosystem, bringing you value in the real and digital world.
               </div>
             </div>
             <div className="w-full md:w-1/2 relative">
