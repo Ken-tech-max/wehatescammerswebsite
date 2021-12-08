@@ -264,9 +264,9 @@ const Home = () => {
               <img src={'/images/team1.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center team-title">GalaxyQueen</h5>
-                {/* <a href="https://twitter.com/cdz999" target="_blank">
+                <a href="https://twitter.com/cdz999" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
-                </a> */}
+                </a>
               </div>
               <p className="text-white text-center overview-desc">CO-FOUNDER</p>
             </div>
@@ -275,9 +275,9 @@ const Home = () => {
               <img src={'/images/team2.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5">
                 <h5 className="text-color-theme text-center team-title">CDZ</h5>
-                {/* <a href="https://twitter.com/cdz999" target="_blank">
+                <a href="https://twitter.com/cdz999" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
-                </a> */}
+                </a>
               </div>
               <p className="text-white text-center overview-desc">CO-FOUNDER</p>
             </div>
