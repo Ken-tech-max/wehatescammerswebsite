@@ -75,14 +75,15 @@ const Home = () => {
         <div className="flex flex-row justify-center items-center space-x-10 px-5">
           <div className="flex flex-col justify-center items-center space-y-3">
 
-            {/* {!wallet.connected && 
+            {!wallet.connected && 
               <span
                 className="text-gray-800 font-bold text-2xl cursor-default">
-                Wallet not connected.
-                <br />
-                Please select wallet...
+                Coming soon...
+                {/* Wallet not connected. */}
+                {/* <br /> */}
+                {/* Please select wallet... */}
               </span>
-            } */}
+            }
 
             {wallet.connected &&
               <>

@@ -56,13 +56,13 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
             </button>
           </div>
           {/* <WalletMultiButton className="button-connect" disabled={true} /> */}
-          <button className="button-connect">Mint Soon</button>
+          <button className="button-connect">Connect Wallet</button>
         </>
         :
         <>
           <div className="flex-grow flex justify-center items-center">
             {/* <WalletMultiButton className="button-connect" disabled={true} /> */}
-            <button className="button-connect">Mint Soon</button>
+            <button className="button-connect">Connect Wallet</button>
           </div>
           <button className="inline-flex justify-center items-center pr-3" onClick={handleClickMenu} >
             <img src={'/images/icon_menu.png'} width="35" />
