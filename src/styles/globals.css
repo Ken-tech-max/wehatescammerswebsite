@@ -244,6 +244,12 @@ section {
 }
 
 @media(max-width: 1280px) {
+  .team-title {
+    font-size: 18px;
+  }
+}
+
+@media(max-width: 1280px) {
   .text-timer-big {
     font-size: 32px;
   }
