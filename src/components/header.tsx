@@ -38,7 +38,7 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
       </div>
       {width > 1280 ?
         <>
-          <div className="flex-grow flex flex-row space-x-16 items-center justify-center">
+          <div className="flex-grow flex flex-row space-x-12 items-center justify-center">
             <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" onClick={() => scrollTo(mintRef, 'MINT')} >
               MINT
             </button>
@@ -57,6 +57,11 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
             <Link href="/store">
               <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" >
                 STORE
+              </button>
+            </Link>
+            <Link href="/stake">
+              <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" >
+                STAKE
               </button>
             </Link>
           </div>
@@ -95,6 +100,11 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
         <Link href="/store">
           <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => handleClickMenu()} >
             STORE
+          </button>
+        </Link>
+        <Link href="/stake">
+          <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => handleClickMenu()} >
+            STAKE
           </button>
         </Link>
 

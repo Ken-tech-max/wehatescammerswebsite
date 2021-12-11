@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useWindowSize } from '../hooks/use-window-size';
 
-const HeaderStore = ({title}: any) => {
+const SubHeader = ({title}: any) => {
 
   const {width, height} = useWindowSize();
 
@@ -28,4 +28,4 @@ const HeaderStore = ({title}: any) => {
   </div>;
 }
 
-export default HeaderStore;
+export default SubHeader;
