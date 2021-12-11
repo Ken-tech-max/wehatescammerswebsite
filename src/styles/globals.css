@@ -108,6 +108,19 @@ section {
   justify-content: center !important;
 }
 
+.header-title {
+  font-size: 36px;
+  font-weight: bold;
+  font-family: 'Amiga';
+}
+
+@media(max-width: 1280px) {
+  .header-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
 @media(max-width: 768px) {
   .button-connect {
     font-size: 14px !important;
