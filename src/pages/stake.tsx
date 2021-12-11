@@ -2,7 +2,6 @@ import Head from 'next/head'
 
 import { Toaster } from 'react-hot-toast';
 import SubHeader from '../components/sub-header';
-import StoreItem from '../components/store-item';
 import { useWindowSize } from '../hooks/use-window-size';
 import StakeItem from '../components/stake-item';
 
@@ -27,8 +26,8 @@ const Stake = () => {
                 <div className="w-full flex justify-center items-center">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-5 md:px-10 py-8">
                         <div className="col-span-1"></div>
-                        <StakeItem image="/images/store.png" title="10123" />
-                        <StakeItem image="/images/store.png" title="10345" />
+                        <StakeItem image="/images/stake1.png" title="123" />
+                        <StakeItem image="/images/stake2.png" title="345" />
                         <div className="col-span-1"></div>
                     </div>
                 </div>
