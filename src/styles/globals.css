@@ -349,6 +349,10 @@ section {
   font-style: italic;
 }
 
+.background-color-tint-black {
+  background-color: rgb(27 25 24);
+}
+
 @media(max-width: 1280px) {
   .faq-header {
     font-size: 18px;
