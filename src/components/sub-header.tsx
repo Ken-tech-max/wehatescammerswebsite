@@ -22,8 +22,8 @@ const SubHeader = ({title}: any) => {
       <div className="flex-grow flex flex-row space-x-16 items-center justify-center">
       <p className="text-white text-center header-title">{title}</p>
       </div>
-      {/* <WalletMultiButton className="button-connect" disabled={true} /> */}
-      <button className="button-connect">Connect Wallet</button>
+      <WalletMultiButton className="button-connect" />
+      {/* <button className="button-connect">Connect Wallet</button> */}
     </div>
   </div>;
 }
