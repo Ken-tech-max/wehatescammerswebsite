@@ -6,12 +6,12 @@ import {
   Token,
 } from "@solana/spl-token";
 import { programs } from '@metaplex/js';
-import { LAMPORTS_PER_SOL, SystemProgram } from "@solana/web3.js";
+import { LAMPORTS_PER_SOL, SystemProgram, PublicKey } from "@solana/web3.js";
 const { metadata: { Metadata } } = programs
 import axios from "axios";
 import { sendTransactions } from "./utility";
 import { fetchHashTable } from "../hooks/use-hash-table";
-import { COLLECTION_NAME } from "./constant";
+import { COLLECTION_NAME, COLLECTION_SYMBOL } from "./constant";
 
 export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
   "cndyAnrLdpjq1Ssp1z8xxDsB8dxe7u4HL5Nxi2K5WXZ"
@@ -242,31 +242,31 @@ const getTokenWallet = async (
 };
 
 export async function getNftsForOwner(connection: anchor.web3.Connection, ownerAddress: anchor.web3.PublicKey) {
-  const allTokens: any = []
+  const allMintsCandyMachine = await fetchHashTable(process.env.NEXT_PUBLIC_CANDY_MACHINE_ID!)
+  const allTokens: any = [];
   const tokenAccounts = await connection.getParsedTokenAccountsByOwner(ownerAddress, {
     programId: TOKEN_PROGRAM_ID
   });
 
+  console.log(allMintsCandyMachine);
+
   for (let index = 0; index < tokenAccounts.value.length; index++) {
     const tokenAccount = tokenAccounts.value[index];
     const tokenAmount = tokenAccount.account.data.parsed.info.tokenAmount;
-
-    if (tokenAmount.amount == "1" && tokenAmount.decimals == "0") {
-
+    
+    if (tokenAmount.amount == "1" && tokenAmount.decimals == "0" && allMintsCandyMachine.includes(tokenAccount.account.data.parsed.info.mint)) {
+      const nftMint = new PublicKey(tokenAccount.account.data.parsed.info.mint);
       let [pda] = await anchor.web3.PublicKey.findProgramAddress([
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
-        (new anchor.web3.PublicKey(tokenAccount.account.data.parsed.info.mint)).toBuffer(),
+        nftMint.toBuffer(),
       ], TOKEN_METADATA_PROGRAM_ID);
       const accountInfo: any = await connection.getParsedAccountInfo(pda);
 
       const metadata: any = new Metadata(ownerAddress.toString(), accountInfo.value);
       const { data }: any = await axios.get(metadata.data.data.uri)
-
-      if (data.collection?.name == COLLECTION_NAME) {
-        const entireData = { ...data, id: Number(data.name.replace( /^\D+/g, '').split(' - ')[0]) }
-        allTokens.push({ ...entireData })
-      }
+      const entireData = { ...data, id: Number(data.name.replace( /^\D+/g, '').split(' - ')[0]) }
+      allTokens.push({ address: nftMint, checked: false, ...entireData });
     }
     allTokens.sort(function (a: any, b: any) {
       if (a.name < b.name) { return -1; }

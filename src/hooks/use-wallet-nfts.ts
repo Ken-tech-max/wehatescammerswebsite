@@ -12,7 +12,7 @@ const useWalletNfts = () => {
   const wallet = useWallet();
   const [isLoading, setIsLoading] = useState(false)
 
-  const [nfts, setNfts] = useState<Array<any>>([])
+  const [unstakedNfts, setUnstakedNfts] = useState<Array<any>>([])
 
   useEffect(() => {
     (async () => {
@@ -28,13 +28,13 @@ const useWalletNfts = () => {
       setIsLoading(true);
 
       const nftsForOwner = await getNftsForOwner(connection, wallet.publicKey);
+      setUnstakedNfts(nftsForOwner as any);
 
-      setNfts(nftsForOwner as any);
       setIsLoading(false);
     })();
   }, [wallet, balance])
 
-  return [isLoading, nfts];
+  return {isLoading, unstakedNfts, setUnstakedNfts};
 }
 
 export default useWalletNfts;

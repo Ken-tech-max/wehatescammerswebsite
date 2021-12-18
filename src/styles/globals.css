@@ -108,6 +108,18 @@ section {
   justify-content: center !important;
 }
 
+.button-stake {
+  color: white !important;
+  background: transparent !important;
+  border: 1px white solid !important;
+  border-radius: 5px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  width: 100px !important;
+  height: 40px !important;
+  justify-content: center !important;
+}
+
 .header-title {
   font-size: 36px;
   font-weight: bold;
@@ -129,6 +141,11 @@ section {
 }
 
 .button-connect:hover {
+  background-color: white !important;
+  color: #74377a !important;
+}
+
+.button-stake:hover {
   background-color: white !important;
   color: #74377a !important;
 }
