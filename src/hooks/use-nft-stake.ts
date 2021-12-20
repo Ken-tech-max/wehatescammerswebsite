@@ -251,13 +251,13 @@ const unstake = async (stakeData : PublicKey, wallet : AnchorWallet) => {
     transaction.add(
       await program.instruction.unstake({
         accounts:{
-          owner : wallet.publicKey,
-          pool : pool,
-          stakeData : stakeData,
-          sourceNftAccount : stakedNft.account,
-          destNftAccount : destNftAccount,
-          tokenProgram : TOKEN_PROGRAM_ID,
-          clock : SYSVAR_CLOCK_PUBKEY
+            owner : wallet.publicKey,
+            pool : pool,
+            stakeData : stakeData,
+            sourceNftAccount : stakedNft.account,
+            destNftAccount : destNftAccount,
+            tokenProgram : TOKEN_PROGRAM_ID,
+            clock : SYSVAR_CLOCK_PUBKEY
         }
       })
     );
@@ -289,29 +289,30 @@ async function claim(wallet : AnchorWallet) {
                 }
             }
         ]
-    })
+    });
     const poolData: any = await getPoolData(wallet);
     let destRewardAccount = await getTokenWallet(wallet.publicKey, poolData.rewardMint);
     let transaction = new Transaction();
     if((await connection.getAccountInfo(destRewardAccount)) == null)
-      transaction.add(createAssociatedTokenAccountInstruction(destRewardAccount,wallet.publicKey,wallet.publicKey, poolData.rewardMint))  
-    for(let stakeAccount of resp){
-      let stakedNft = await program.account.stakeData.fetch(stakeAccount.pubkey)
-      let num = (moment().unix() - stakedNft.stakeTime.toNumber()) / poolData.period
-      if(num > poolData.withdrawable) num = poolData.withdrawable
-      transaction.add(
-        await program.instruction.claim({
-          accounts:{
-            owner : wallet.publicKey,
-            pool : pool,
-            stakeData : stakeAccount.pubkey,
-            sourceRewardAccount : poolData.rewardAccount,
-            destRewardAccount : destRewardAccount,
-            tokenProgram : TOKEN_PROGRAM_ID,
-            clock : SYSVAR_CLOCK_PUBKEY,
-          }
-        })
-      )
+        transaction.add(createAssociatedTokenAccountInstruction(destRewardAccount,wallet.publicKey,wallet.publicKey, poolData.rewardMint))  
+    for(let stakeAccount of resp) {
+        let stakedNft = await program.account.stakeData.fetch(stakeAccount.pubkey);
+        let num = (moment().unix() - stakedNft.stakeTime.toNumber()) / poolData.period;
+        if (stakedNft.withdrawnNumber >= poolData.withdrawable) continue;
+        if (num > poolData.withdrawable) num = poolData.withdrawable;
+        transaction.add(
+            await program.instruction.claim({
+                accounts:{
+                    owner : wallet.publicKey,
+                    pool : pool,
+                    stakeData : stakeAccount.pubkey,
+                    sourceRewardAccount : poolData.rewardAccount,
+                    destRewardAccount : destRewardAccount,
+                    tokenProgram : TOKEN_PROGRAM_ID,
+                    clock : SYSVAR_CLOCK_PUBKEY,
+                }
+            })
+        )
     };
     await sendTransaction(transaction, [], wallet);
 }
@@ -322,6 +323,7 @@ const useNftStake = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [stakedNfts, setStakedNfts] = useState<Array<any>>([]);
     const [claimAmount, setClaimAmount] = useState(0);
+    const [poolData, setPoolData] = useState({});
 
     useEffect(() => {
         (async () => {
@@ -336,6 +338,8 @@ const useNftStake = () => {
 
             setIsLoading(true);
 
+            const poolDataForOwner: any = await getPoolData(anchorWallet);
+            setPoolData(poolDataForOwner);
             const stakedNftsForOwner = await getStakedNftsForOwner(anchorWallet);
             setStakedNfts(stakedNftsForOwner);
             const claimAmountForOwner = Math.floor(await getClaimAmount(anchorWallet));
@@ -392,7 +396,7 @@ const useNftStake = () => {
         setIsLoading(false);
     }
 
-    return { isLoading, stakedNfts, claimAmount, stakeNft, unstakeNft, claimRewards };
+    return { isLoading, poolData, stakedNfts, claimAmount, stakeNft, unstakeNft, claimRewards };
 }
 
 export default useNftStake;

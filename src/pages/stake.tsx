@@ -13,10 +13,10 @@ import useNftStake from '../hooks/use-nft-stake';
 
 const Stake = () => {
 
-    const [visibleUnstakedNftDialog, setVisibleUnstakedNftDialog] = useState(false);
+    const [visibleWalletNftDialog, setVisibleWalletNftDialog] = useState(false);
     const wallet = useWallet();
     const { isLoadingWalletNfts, walletNfts, setWalletNfts } = useWalletNfts();
-    const { isLoading, stakedNfts, claimAmount, stakeNft, unstakeNft, claimRewards } = useNftStake();
+    const { isLoading, poolData, stakedNfts, claimAmount, stakeNft, unstakeNft, claimRewards } = useNftStake();
     const cancelButtonRef = useRef(null);
 
     const handleStakeNfts = async () => {
@@ -26,7 +26,7 @@ const Stake = () => {
             return;
         }
 
-        setVisibleUnstakedNftDialog(false);
+        setVisibleWalletNftDialog(false);
 
         for (let i = 0; i < selectedNfts.length; i++) {
             const nft = selectedNfts[i];
@@ -54,7 +54,7 @@ const Stake = () => {
             };
         }));
 
-        setVisibleUnstakedNftDialog(true);
+        setVisibleWalletNftDialog(true);
     }
 
     const handleUnstake = async (nft: any) => {
@@ -86,7 +86,16 @@ const Stake = () => {
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-5 md:px-10 py-8">
                             {
                                 stakedNfts.map((nft: any, idx: number) => {
-                                    return <StakeItem key={idx} image={nft.image} name={nft.name} type={STAKE_STATUS.STAKED} nft={nft} handleButton={handleUnstake}></StakeItem>;
+                                    return <StakeItem 
+                                                key={idx} 
+                                                image={nft.image} 
+                                                name={nft.name} 
+                                                type={STAKE_STATUS.STAKED} 
+                                                nft={nft} 
+                                                poolData={poolData} 
+                                                handleButton={handleUnstake}
+                                            >
+                                            </StakeItem>;
                                 })
                             }
                             </div>
@@ -116,8 +125,8 @@ const Stake = () => {
             </section>
             }
 
-            <Transition.Root show={visibleUnstakedNftDialog} as={Fragment}>
-                <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setVisibleUnstakedNftDialog}>
+            <Transition.Root show={visibleWalletNftDialog} as={Fragment}>
+                <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setVisibleWalletNftDialog}>
                     <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                         <Transition.Child
                             as={Fragment}
@@ -162,7 +171,16 @@ const Stake = () => {
                                                 {
                                                     walletNfts.map((nft: any, idx: number) => {
                                                         return <button key={idx} onClick={() => handleSelectUnstakeNft(idx)}>
-                                                            <StakeItem image={nft.image} name={nft.name} checked={nft.checked} type={STAKE_STATUS.UNSTAKED} nft={nft} handleButton={null}></StakeItem>
+                                                            <StakeItem 
+                                                                image={nft.image} 
+                                                                name={nft.name} 
+                                                                checked={nft.checked} 
+                                                                type={STAKE_STATUS.UNSTAKED} 
+                                                                poolData={poolData} 
+                                                                nft={nft} 
+                                                                handleButton={null}
+                                                            >
+                                                            </StakeItem>
                                                         </button>;
                                                     })
                                                 }
@@ -186,7 +204,7 @@ const Stake = () => {
                                 <button
                                     type="button"
                                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-800 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-gray-300 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                                    onClick={() => setVisibleUnstakedNftDialog(false)}
+                                    onClick={() => setVisibleWalletNftDialog(false)}
                                     ref={cancelButtonRef}
                                 >
                                     Cancel
