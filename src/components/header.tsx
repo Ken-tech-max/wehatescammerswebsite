@@ -114,7 +114,7 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
           <a href="https://twitter.com/gorillaglxy" className="inline-flex text-center justify-center items-center">
             <img src={'/images/icon_twitter.png'} />
           </a>
-          <a href="https://discord.gg/YM6NKnVHsB" className="inline-flex text-center justify-center items-center">
+          <a href="https://discord.gg/GZpTs7pG27" className="inline-flex text-center justify-center items-center">
             <img src={'/images/icon_discord.png'} />
           </a>
           <div className="col-span-1"></div>
