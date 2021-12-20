@@ -12,6 +12,7 @@ import {
     Transaction,
     ConfirmOptions,
     SYSVAR_CLOCK_PUBKEY,
+    LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import axios from "axios";
 import { STAKE_DATA_SIZE, STAKE_CONTRACT_IDL } from '../utils/constant';
@@ -68,10 +69,10 @@ const sendTransaction = async (transaction : Transaction, signers : Keypair[], w
         const signedTransaction = await wallet.signTransaction(transaction);
         let hash = await connection.sendRawTransaction(await signedTransaction.serialize());
         await connection.confirmTransaction(hash);
-        toast.success('Success!');
+        toast.success('Transaction succeed.');
     } catch(err) {
         console.log(err);
-        toast.error('Failed Instruction!');
+        toast.error('Transaction failed. Please try again.');
     }
 }
 
@@ -316,7 +317,7 @@ async function claim(wallet : AnchorWallet) {
 }
 
 const useNftStake = () => {
-    const [balance] = useWalletBalance();
+    const [balance, setBalance] = useWalletBalance();
     const anchorWallet = useAnchorWallet();
     const [isLoading, setIsLoading] = useState(false);
     const [stakedNfts, setStakedNfts] = useState<Array<any>>([]);
@@ -337,12 +338,17 @@ const useNftStake = () => {
 
             const stakedNftsForOwner = await getStakedNftsForOwner(anchorWallet);
             setStakedNfts(stakedNftsForOwner);
-            const claimAmountForOwner = await getClaimAmount(anchorWallet);
+            const claimAmountForOwner = Math.floor(await getClaimAmount(anchorWallet));
             setClaimAmount(claimAmountForOwner);
 
             setIsLoading(false);
         })();
     }, [anchorWallet, balance]);
+
+    const updateBalance = async (wallet: AnchorWallet) => {
+        const balance = await connection.getBalance(wallet.publicKey);
+        setBalance(balance / LAMPORTS_PER_SOL);
+    }
 
     const stakeNft = async (nftMint : PublicKey) => {
         if (!anchorWallet) {
@@ -353,19 +359,7 @@ const useNftStake = () => {
         setIsLoading(true);
 
         await stake(nftMint, anchorWallet);
-
-        setIsLoading(false);
-    }
-
-    const claimRewards = async () => {
-        if (!anchorWallet) {
-            toast.error('Connect wallet first, please.');
-            return;
-        }
-
-        setIsLoading(true);
-
-        await claim(anchorWallet);
+        await updateBalance(anchorWallet);
 
         setIsLoading(false);
     }
@@ -379,6 +373,21 @@ const useNftStake = () => {
         setIsLoading(true);
 
         await unstake(stakeData, anchorWallet);
+        await updateBalance(anchorWallet);
+
+        setIsLoading(false);
+    }
+
+    const claimRewards = async () => {
+        if (!anchorWallet) {
+            toast.error('Connect wallet first, please.');
+            return;
+        }
+
+        setIsLoading(true);
+
+        await claim(anchorWallet);
+        await updateBalance(anchorWallet);
 
         setIsLoading(false);
     }
