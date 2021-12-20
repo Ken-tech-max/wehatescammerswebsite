@@ -7,7 +7,6 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import useWalletBalance from '../hooks/use-wallet-balance';
 import Countdown from 'react-countdown';
-import usePresale from '../hooks/use-presale';
 import toast from 'react-hot-toast';
 import { useWindowSize } from '../hooks/use-window-size';
 import Link from 'next/link';
@@ -18,7 +17,6 @@ const Home = () => {
   const [isActive, setIsActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const { isSoldOut, mintStartDate, isMinting, onMintNFT, nftsData } = useCandyMachine();
-  const { isStatusLoading, mintStatus, currentHoldedCount, maxNFTHoldCount } = usePresale();
   const [imageIndex, setImageIndex] = useState(1);
   const [activeFaqIndex, setActiveFaqIndex] = useState(-1);
 
@@ -304,7 +302,7 @@ const Home = () => {
 
       <Footer />
 
-      {(wallet.connected && (isStatusLoading || isMinting)) &&
+      {(wallet.connected && isMinting) &&
         <div className="w-full h-full fixed block top-0 left-0 bg-black opacity-75 z-50 flex justify-center items-center">
           <div
             className="
