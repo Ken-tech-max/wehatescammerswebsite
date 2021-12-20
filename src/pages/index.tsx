@@ -292,7 +292,7 @@ const Home = () => {
             <div className="w-full flex justify-center items-center">
               <Link href="/"><img src={'/images/logo.png'} width={200} className="cursor-pointer" /></Link>
             </div>
-            <a href="https://discord.gg/YM6NKnVHsB" target="_blank">
+            <a href="https://discord.gg/GZpTs7pG27" target="_blank">
               <button className="button-connect">JOIN OUR DISCORD</button>
             </a>
           </div>

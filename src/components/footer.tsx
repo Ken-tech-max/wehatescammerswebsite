@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
         <a href="https://twitter.com/gorillaglxy" target="_blank" className="inline-flex text-center justify-center items-center">
           <img src={'/images/icon_twitter.png'} />
         </a>
-        <a href="https://discord.gg/YM6NKnVHsB" target="_blank" className="inline-flex text-center justify-center items-center">
+        <a href="https://discord.gg/GZpTs7pG27" target="_blank" className="inline-flex text-center justify-center items-center">
           <img src={'/images/icon_discord.png'} />
         </a>
       </div>
