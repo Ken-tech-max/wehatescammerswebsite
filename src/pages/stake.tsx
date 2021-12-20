@@ -2,7 +2,6 @@ import Head from 'next/head'
 
 import { Toaster } from 'react-hot-toast';
 import SubHeader from '../components/sub-header';
-import { useWindowSize } from '../hooks/use-window-size';
 import StakeItem from '../components/stake-item';
 import useWalletNfts from '../hooks/use-wallet-nfts';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -10,37 +9,33 @@ import { STAKE_STATUS } from '../utils/constant';
 import { useState, useRef, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import toast from 'react-hot-toast';
+import useNftStake from '../hooks/use-nft-stake';
 
 const Stake = () => {
 
-    const {width, height} = useWindowSize();
     const [visibleUnstakedNftDialog, setVisibleUnstakedNftDialog] = useState(false);
     const wallet = useWallet();
-    const {isLoading, unstakedNfts, setUnstakedNfts} = useWalletNfts();
+    const { isLoadingWalletNfts, walletNfts, setWalletNfts } = useWalletNfts();
+    const { isLoading, stakedNfts, claimAmount, stakeNft, unstakeNft, claimRewards } = useNftStake();
     const cancelButtonRef = useRef(null);
 
-    // TODO: fetch staked NFTs for current wallet
-    const [stakedNfts, setStakedNfts] = useState<Array<any>>([]);
-    // TODO: fetch redeem(expired) NFTs for current wallet
-    const [redeemNfts, setRedeemNfts] = useState<Array<any>>([]);
-    // TODO: accumulated $GLUE
-    const [rewards, setRewards] = useState(0);
-
     const handleStakeNfts = async () => {
-        const selectedNfts = unstakedNfts.filter((nft: any) => {if (nft.checked) return nft;});
+        const selectedNfts = walletNfts.filter((nft: any) => {if (nft.checked) return nft;});
         if (selectedNfts.length == 0) {
             toast.error("Please select Gorilla at least one.");
             return;
         }
 
-        // TODO: stake selected NFTs
-        console.log(selectedNfts);
-
         setVisibleUnstakedNftDialog(false);
+
+        for (let i = 0; i < selectedNfts.length; i++) {
+            const nft = selectedNfts[i];
+            await stakeNft(nft.address);
+        }
     }
 
     const handleSelectUnstakeNft = (index: number) => {
-        setUnstakedNfts(unstakedNfts.map((nft: any, idx: number) => {
+        setWalletNfts(walletNfts.map((nft: any, idx: number) => {
             if (index == idx) {
                 return {
                     ...nft,
@@ -52,7 +47,7 @@ const Stake = () => {
     }
 
     const handleStakeButton = () => {
-        setUnstakedNfts(unstakedNfts.map((nft: any) => {
+        setWalletNfts(walletNfts.map((nft: any) => {
             return {
                 ...nft,
                 checked: false
@@ -63,17 +58,11 @@ const Stake = () => {
     }
 
     const handleUnstake = async (nft: any) => {
-        // TODO: unstake selected NFT
-        console.log(nft);
-    }
-
-    const handleRedeem = async (nft: any) => {
-        // TODO: redeem selected NFT
-        console.log(nft);
+        await unstakeNft(nft.stakeData);
     }
 
     const handleClaim = async () => {
-        // TODO: claim $GLUEs
+        await claimRewards();
     }
 
     return (
@@ -106,23 +95,6 @@ const Stake = () => {
                     }
                 </div>
 
-                <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Your redeem Gorillas:</h3>
-
-                <div className="w-full flex justify-center items-center">
-                    {
-                        redeemNfts.length > 0 ?
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-5 md:px-10 py-8">
-                            {
-                                redeemNfts.map((nft: any, idx: number)=>{
-                                    return <StakeItem key={idx} image={nft.image} name={nft.name} type={STAKE_STATUS.REDEEM} nft={nft} handleButton={handleRedeem}></StakeItem>;
-                                })
-                            }
-                            </div>
-                        :
-                            <p className="text-color-theme text-center font-amiga mb-5">There is no redeem Gorillas.</p>
-                    }
-                </div>
-
                 <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Stake a gorilla:</h3>
 
                 <div className="w-full flex justify-center items-center">
@@ -132,7 +104,7 @@ const Stake = () => {
                 <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Staking Rewards:</h3>
 
                 <div className="w-full flex flex-col justify-center items-center">
-                    <p className="text-color-theme text-center font-amiga mb-5">{rewards} $GLUE</p>
+                    <p className="text-color-theme text-center font-amiga mb-5">{claimAmount} $GLUE</p>
                     <button className="button-connect" onClick={() => handleClaim()}>CLAIM</button>
                 </div>
 
@@ -185,10 +157,10 @@ const Stake = () => {
                                         </p>
                                         <div className="w-full flex justify-center items-center">
                                         {
-                                            unstakedNfts.length > 0 ?
+                                            walletNfts.length > 0 ?
                                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-5 md:px-10 py-8">
                                                 {
-                                                    unstakedNfts.map((nft: any, idx: number) => {
+                                                    walletNfts.map((nft: any, idx: number) => {
                                                         return <button key={idx} onClick={() => handleSelectUnstakeNft(idx)}>
                                                             <StakeItem image={nft.image} name={nft.name} checked={nft.checked} type={STAKE_STATUS.UNSTAKED} nft={nft} handleButton={null}></StakeItem>
                                                         </button>;
@@ -226,7 +198,7 @@ const Stake = () => {
                 </Dialog>
             </Transition.Root>
 
-            {(wallet.connected && isLoading) &&
+            {(wallet.connected && (isLoading || isLoadingWalletNfts)) &&
             <div className="w-full h-full fixed block top-0 left-0 bg-black opacity-75 z-50 flex justify-center items-center">
                 <div
                     className="
@@ -238,7 +210,7 @@ const Stake = () => {
                     "
                 ></div>
             </div>
-      }
+        }
         </div>
     );
 };

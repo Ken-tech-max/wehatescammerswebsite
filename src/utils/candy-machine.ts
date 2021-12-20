@@ -248,8 +248,6 @@ export async function getNftsForOwner(connection: anchor.web3.Connection, ownerA
     programId: TOKEN_PROGRAM_ID
   });
 
-  console.log(allMintsCandyMachine);
-
   for (let index = 0; index < tokenAccounts.value.length; index++) {
     const tokenAccount = tokenAccounts.value[index];
     const tokenAmount = tokenAccount.account.data.parsed.info.tokenAmount;

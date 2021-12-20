@@ -3,7 +3,7 @@ import { STAKE_STATUS } from '../utils/constant';
 
 const StakeItem = ({image, name, checked, type, nft, handleButton}: any) => {
 
-  const buttonText = type == STAKE_STATUS.UNSTAKED ? "" : type == STAKE_STATUS.STAKED ? "Unstake" : "Redeem";
+  const buttonText = (type == STAKE_STATUS.UNSTAKED) ? "" : "Redeem";
 
   return <div className={`mx-2 md:mx-5 col-span-1 ${checked ? "border-4 border-purple-800" : "border border-gray-500"} rounded-lg overflow-hidden`}>
     <div className="w-full h-full flex flex-col justify-center items-center space-y-2 pb-2">
