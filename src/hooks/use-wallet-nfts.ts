@@ -10,9 +10,9 @@ const connection = new anchor.web3.Connection(rpcHost);
 const useWalletNfts = () => {
   const [balance] = useWalletBalance();
   const wallet = useWallet();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingWalletNfts, setIsLoadingWalletNfts] = useState(false);
 
-  const [nfts, setNfts] = useState<Array<any>>([])
+  const [walletNfts, setWalletNfts] = useState<Array<any>>([]);
 
   useEffect(() => {
     (async () => {
@@ -25,16 +25,16 @@ const useWalletNfts = () => {
         return;
       }
 
-      setIsLoading(true);
+      setIsLoadingWalletNfts(true);
 
       const nftsForOwner = await getNftsForOwner(connection, wallet.publicKey);
+      setWalletNfts(nftsForOwner as any);
 
-      setNfts(nftsForOwner as any);
-      setIsLoading(false);
+      setIsLoadingWalletNfts(false);
     })();
   }, [wallet, balance])
 
-  return [isLoading, nfts];
+  return { isLoadingWalletNfts, walletNfts, setWalletNfts };
 }
 
 export default useWalletNfts;

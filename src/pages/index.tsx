@@ -76,14 +76,15 @@ const Home = () => {
             {!wallet.connected && 
               <span
                 className="text-gray-800 font-bold text-2xl cursor-default">
+                {/* Wallet not connected.
+                <br />
+                Please select wallet... */}
+
                 Coming soon...
-                {/* Wallet not connected. */}
-                {/* <br /> */}
-                {/* Please select wallet... */}
               </span>
             }
 
-            {wallet.connected &&
+            {wallet.connected && isActive &&
               <>
                 <p className="text-white font-bold text-lg cursor-default text-center">Minted / Total <br /> {nftsData.itemsRedeemed} / {nftsData.itemsAvailable}</p>
               </>
@@ -92,14 +93,16 @@ const Home = () => {
             <div className="flex flex-col justify-start items-start">
               {wallet.connected &&
                 <>
-                  <input 
-                    min={1}
-                    max={10}
-                    type="number" 
-                    className="input-number"
-                    onChange={(e) => setQuantity(Number(e.target.value))} 
-                    style={{border: 'solid 1px grey', textAlign: 'center', width: '90%', margin: 5}} 
-                    value={quantity} />
+                  {isActive &&
+                    <input 
+                      min={1}
+                      max={10}
+                      type="number" 
+                      className="input-number"
+                      onChange={(e) => setQuantity(Number(e.target.value))} 
+                      style={{border: 'solid 1px grey', textAlign: 'center', width: '90%', margin: 5}} 
+                      value={quantity} />
+                  }
 
                   <button
                     disabled={isSoldOut || isMinting || !isActive}
@@ -323,10 +326,7 @@ const renderCounter = ({ days, hours, minutes, seconds }: any) => {
   return (
     <div className="panel-mint-timer">
       <span>
-        <span className="text-timer-big">{days}</span> <span className="text-timer-small">Days</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        <span className="text-timer-big">{hours}</span> <span className="text-timer-small">Hrs</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        <span className="text-timer-big">{minutes}</span> <span className="text-timer-small">Min</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span className="text-timer-big">{seconds}</span> <span className="text-timer-small">Sec</span>
+        Live in {days > 0 && <span>{days}d</span>} {hours}:{minutes}:{seconds} 
       </span>
     </div>
   );

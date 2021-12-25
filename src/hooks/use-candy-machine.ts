@@ -119,7 +119,7 @@ export default function useCandyMachine() {
         );
 
         if (!status?.err) {
-          toast.success("Congratulations! You have just got PW.");
+          toast.success("Congratulations! You have just got Gorilla.");
         } else {
           toast.error("Mint failed! Please try again!");
         }
@@ -202,7 +202,7 @@ export default function useCandyMachine() {
         }
 
         if(totalSuccess) {
-          toast.success(`Congratulations! You've got ${totalSuccess} PWs`, { duration: 6000})
+          toast.success(`Congratulations! You've got ${totalSuccess} Gorillas`, { duration: 6000})
         }
 
         if(totalFailure) {
