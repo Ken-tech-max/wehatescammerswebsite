@@ -69,7 +69,7 @@ const Home = () => {
       </section>
 
       <section ref={mintRef}>
-        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Gorilla</h3>
+        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Galaxy Shuttle Pass</h3>
         <div className="flex flex-row justify-center items-center space-x-10 px-5">
           <div className="flex flex-col justify-center items-center space-y-3">
 
