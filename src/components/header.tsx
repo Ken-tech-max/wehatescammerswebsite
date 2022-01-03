@@ -65,14 +65,14 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
               </button>
             </Link> */}
           </div>
-          {/* <WalletMultiButton className="button-connect" /> */}
-          <button className="button-connect">Connect Wallet</button>
+          <WalletMultiButton className="button-connect" />
+          {/* <button className="button-connect">Connect Wallet</button> */}
         </>
         :
         <>
           <div className="flex-grow flex justify-center items-center">
-            {/* <WalletMultiButton className="button-connect" /> */}
-            <button className="button-connect">Connect Wallet</button>
+            <WalletMultiButton className="button-connect" />
+            {/* <button className="button-connect">Connect Wallet</button> */}
           </div>
           <button className="inline-flex justify-center items-center pr-3" onClick={handleClickMenu} >
             <img src={'/images/icon_menu.png'} width="35" />

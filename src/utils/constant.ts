@@ -1,4 +1,4 @@
-export const COLLECTION_NAME = "Gorilla";
+export const COLLECTION_NAME = "Gorilla Galaxy";
 export const COLLECTION_SYMBOL = "Gorilla";
 
 export const STAKE_STATUS = {

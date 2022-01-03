@@ -76,11 +76,11 @@ const Home = () => {
             {!wallet.connected && 
               <span
                 className="text-gray-800 font-bold text-2xl cursor-default">
-                {/* Wallet not connected.
+                Wallet not connected.
                 <br />
-                Please select wallet... */}
+                Please select wallet...
 
-                Coming soon...
+                {/* Coming soon... */}
               </span>
             }
 
@@ -93,7 +93,7 @@ const Home = () => {
             <div className="flex flex-col justify-start items-start">
               {wallet.connected &&
                 <>
-                  {isActive &&
+                  {/* {isActive &&
                     <input 
                       min={1}
                       max={10}
@@ -102,7 +102,7 @@ const Home = () => {
                       onChange={(e) => setQuantity(Number(e.target.value))} 
                       style={{border: 'solid 1px grey', textAlign: 'center', width: '90%', margin: 5}} 
                       value={quantity} />
-                  }
+                  } */}
 
                   <button
                     disabled={isSoldOut || isMinting || !isActive}
@@ -115,7 +115,10 @@ const Home = () => {
                           isMinting ? 
                             <div className="loader"></div>
                           : 
-                            <span>MINT {quantity}</span>
+                            <span>
+                              MINT 
+                              {/* {quantity} */}
+                            </span>
                         :
                         <Countdown
                           date={mintStartDate}
@@ -130,7 +133,8 @@ const Home = () => {
             </div>
           </div>
           <div className="flex justify-center items-center outer-glow">
-            <img src={`/images/art${imageIndex}.png`} width={200} />
+            {/* <img src={`/images/art${imageIndex}.png`} width={200} /> */}
+            <img src='/images/shuttle_pass.gif' width={200} />
           </div>
         </div>
       </section>

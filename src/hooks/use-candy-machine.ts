@@ -5,8 +5,10 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import toast from 'react-hot-toast';
 import useWalletBalance from "./use-wallet-balance";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { WHITELIST_SHUTTLE_PASS } from "../utils/whitelist";
 
 const MINT_PRICE_SOL = Number(process.env.NEXT_PUBLIC_MINT_PRICE_SOL!);
+const whitelisting = (Number(process.env.NEXT_PUBLIC_WHITELISTING) == 1);
 
 const treasury = new anchor.web3.PublicKey(
   process.env.NEXT_PUBLIC_TREASURY_ADDRESS!
@@ -119,7 +121,7 @@ export default function useCandyMachine() {
         );
 
         if (!status?.err) {
-          toast.success("Congratulations! You have just got Gorilla.");
+          toast.success("Congratulations! You have just got Shuttle Pass.");
         } else {
           toast.error("Mint failed! Please try again!");
         }
@@ -202,7 +204,7 @@ export default function useCandyMachine() {
         }
 
         if(totalSuccess) {
-          toast.success(`Congratulations! You've got ${totalSuccess} Gorillas`, { duration: 6000})
+          toast.success(`Congratulations! You've got ${totalSuccess} Shuttle Passes`, { duration: 6000})
         }
 
         if(totalFailure) {
@@ -236,7 +238,15 @@ export default function useCandyMachine() {
     }
   };
 
-  const onMintNFT = async (quantity: number) => {    
+  const onMintNFT = async (quantity: number) => {
+    if (whitelisting) {
+      if (!WHITELIST_SHUTTLE_PASS.includes(wallet.publicKey?.toBase58() || '')) {
+        toast.error('You are not in whitelist.');
+        return;
+      }
+    }
+
+    // Proceed mint
     if (quantity == 1) {
       await onMint();
     } else if (quantity > 1) {
