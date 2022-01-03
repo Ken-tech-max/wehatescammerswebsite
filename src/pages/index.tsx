@@ -86,6 +86,7 @@ const Home = () => {
 
             {wallet.connected && isActive &&
               <>
+                <p className="text-white font-bold text-lg cursor-default text-center">Price 1 SOL</p>
                 <p className="text-white font-bold text-lg cursor-default text-center">Minted / Total <br /> {nftsData.itemsRedeemed} / {nftsData.itemsAvailable}</p>
               </>
             }
@@ -240,7 +241,7 @@ const Home = () => {
                     <div>When?</div>
                     <div className='faq-icon'>{activeFaqIndex == 2 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
-                <div className={activeFaqIndex == 2 ? 'active-faq-content' : 'faq-content'}>Minting date TBA</div>
+                <div className={activeFaqIndex == 2 ? 'active-faq-content' : 'faq-content'}>Feb 2nd 2022</div>
             </div>
             <div className={activeFaqIndex == 3 ? 'faq active-faq' : 'faq'}>
                 <div className='faq-header' onClick={() => handleFaq(3)}>
