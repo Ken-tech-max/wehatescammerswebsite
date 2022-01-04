@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import * as anchor from "@project-serum/anchor";
-import { awaitTransactionSignatureConfirmation, CandyMachine, getCandyMachineState, mintOneToken, mintMultipleToken } from "../utils/candy-machine";
+import { awaitTransactionSignatureConfirmation, CandyMachine, getCandyMachineState, mintOneToken, mintMultipleToken, getShuttlePassNFTHoldCount } from "../utils/candy-machine";
 import { useWallet } from "@solana/wallet-adapter-react";
 import toast from 'react-hot-toast';
 import useWalletBalance from "./use-wallet-balance";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { WHITELIST_SHUTTLE_PASS } from "../utils/whitelist";
+import { SHUTTLE_PASS_MAX_HOLD_COUNT } from "../utils/constant";
 
 const MINT_PRICE_SOL = Number(process.env.NEXT_PUBLIC_MINT_PRICE_SOL!);
 const whitelisting = (Number(process.env.NEXT_PUBLIC_WHITELISTING) == 1);
@@ -244,6 +245,21 @@ export default function useCandyMachine() {
         toast.error('You are not in whitelist.');
         return;
       }
+    }
+
+    let shuttlePassCount = 0;
+    if (wallet && wallet.publicKey) {
+      setIsMinting(true);
+      shuttlePassCount = await getShuttlePassNFTHoldCount(connection, wallet.publicKey);
+      setIsMinting(false);
+
+      if (shuttlePassCount >= SHUTTLE_PASS_MAX_HOLD_COUNT) {
+        toast.error(`You can't mint more than ${SHUTTLE_PASS_MAX_HOLD_COUNT} Shuttle Passes.`);
+        return;
+      }
+    } else {
+      toast.error('Please connect wallet first.');
+      return;
     }
 
     // Proceed mint
