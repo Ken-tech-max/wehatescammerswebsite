@@ -7,7 +7,6 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import useWalletBalance from '../hooks/use-wallet-balance';
 import Countdown from 'react-countdown';
-import toast from 'react-hot-toast';
 import { useWindowSize } from '../hooks/use-window-size';
 import Link from 'next/link';
 
