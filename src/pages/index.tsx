@@ -7,7 +7,6 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import useWalletBalance from '../hooks/use-wallet-balance';
 import Countdown from 'react-countdown';
-import { useWindowSize } from '../hooks/use-window-size';
 import Link from 'next/link';
 
 const Home = () => {
@@ -18,8 +17,6 @@ const Home = () => {
   const { isSoldOut, mintStartDate, isMinting, onMintNFT, nftsData } = useCandyMachine();
   const [imageIndex, setImageIndex] = useState(1);
   const [activeFaqIndex, setActiveFaqIndex] = useState(-1);
-
-  const {width, height} = useWindowSize();
 
   const mintRef = useRef(null);
   const aboutRef = useRef(null);
