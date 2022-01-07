@@ -83,7 +83,7 @@ const Home = () => {
             {wallet.connected && isActive &&
               <>
                 <p className="text-white font-bold text-lg cursor-default text-center">Price 1 SOL</p>
-                <p className="text-white font-bold text-lg cursor-default text-center">Minted / Total <br /> {nftsData.itemsRedeemed} / {nftsData.itemsAvailable}</p>
+                {/* <p className="text-white font-bold text-lg cursor-default text-center">Minted / Total <br /> {nftsData.itemsRedeemed} / {nftsData.itemsAvailable}</p> */}
               </>
             }
 
