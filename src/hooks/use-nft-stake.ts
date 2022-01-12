@@ -19,8 +19,7 @@ import { STAKE_DATA_SIZE, STAKE_CONTRACT_IDL } from '../utils/constant';
 
 const { metadata: { Metadata } } = programs;
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s");
-const rpcHost = process.env.NEXT_PUBLIC_SOLANA_RPC_HOST!;
-const connection = new anchor.web3.Connection(rpcHost);
+const connection = new anchor.web3.Connection("https://billowing-red-frost.solana-devnet.quiknode.pro/6c6c32a71431349d7b452062bdc3dff22015a20e/");
 const programId = new PublicKey(process.env.NEXT_PUBLIC_STAKE_CONTRACT_ID!);
 const pool = new PublicKey(process.env.NEXT_PUBLIC_STAKE_POOL_ID!);
 const idl = STAKE_CONTRACT_IDL as anchor.Idl;
