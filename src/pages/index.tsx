@@ -320,6 +320,7 @@ const Home = () => {
   );
 };
 
+
 const renderCounter = ({ days, hours, minutes, seconds }: any) => {
   return (
     <div className="panel-mint-timer">
