@@ -14,7 +14,7 @@ const Store = () => {
             <Toaster />
             <Head>
                 <title>Gorilla Galaxy</title>
-                <meta name="description" content="Genesis is a collection of 4444 unique, randomly generated Gorillas roaming on the Solana blockchain." />
+                <meta name="description" content="Genesis is a collection of 2,222 unique, randomly generated Gorillas roaming on the Solana blockchain." />
                 <link rel="icon" href="/icon.png" />
             </Head>
     

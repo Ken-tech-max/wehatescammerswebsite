@@ -48,7 +48,7 @@ const Home = () => {
 
       <Head>
         <title>Gorilla Galaxy</title>
-        <meta name="description" content="Genesis is a collection of 4444 unique, randomly generated Gorillas roaming on the Solana blockchain." />
+        <meta name="description" content="Genesis is a collection of 2,222 unique, randomly generated Gorillas roaming on the Solana blockchain." />
         <link rel="icon" href="/icon.png" />
       </Head>
 
@@ -142,7 +142,7 @@ const Home = () => {
             <div className="w-full md:w-1/2 flex flex-col justify-center items-center">
               <h3 className="text-white text-center overview-title drop-shadow-lg">Genesis</h3>
               <div className="overview-desc-panel text-white p-5">
-                Gorilla Galaxy: Genesis is a collection of 4444 unique, randomly generated Gorillas roaming on the Solana blockchain. 
+                Gorilla Galaxy: Genesis is a collection of 2,222 unique, randomly generated Gorillas roaming on the Solana blockchain. 
                 <br />
                 <br />
                 Every Genesis Gorilla is unique and programmatically generated from over 130+ possible attributes and traits like background, fur, clothes, mouth, head, earrings and eyes. Some gorillas will be rarer than others. 
@@ -230,7 +230,7 @@ const Home = () => {
                     <div>Supply?</div>
                     <div className='faq-icon'>{activeFaqIndex == 1 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
-                <div className={activeFaqIndex == 1 ? 'active-faq-content' : 'faq-content'}>The total supply of Genesis gorillas is 4,444.</div>
+                <div className={activeFaqIndex == 1 ? 'active-faq-content' : 'faq-content'}>The total supply of Genesis gorillas is 2,222.</div>
             </div>
             <div className={activeFaqIndex == 2 ? 'faq active-faq' : 'faq'}>
                 <div className='faq-header' onClick={() => handleFaq(2)}>
