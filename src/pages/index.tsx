@@ -12,6 +12,7 @@ import {
   awaitTransactionSignatureConfirmation,
   CandyMachineAccount,
   getCandyMachineState,
+  mintMultipleToken,
   mintOneToken,
 } from '../utils/candy-machine';
 import { toDate, getMintPrice } from '../utils/util';
@@ -28,6 +29,7 @@ export interface HomeProps {
 const Home = (props: HomeProps) => {
   const [isUserMinting, setIsUserMinting] = useState(false);
   const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
+  const [quantity, setQuantity] = useState(1);
 
   const rpcUrl = props.rpcHost;
   const wallet = useWallet();
@@ -69,7 +71,15 @@ const Home = (props: HomeProps) => {
     }
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
-  const onMint = async () => {
+  const onMint = async (quantity: number) => {
+    if (quantity == 1) {
+      await MintSingle();
+    } else if (quantity > 1) {
+      await MintMultiple(quantity);
+    }
+  }
+
+  const MintSingle = async () => {
     try {
       setIsUserMinting(true);
       document.getElementById('#identity')?.click();
@@ -91,7 +101,7 @@ const Home = (props: HomeProps) => {
         if (status && !status.err) {
           toast.success('Congratulations! Mint succeeded!');
         } else {
-          toast.success('Mint failed! Please try again!');
+          toast.error('Mint failed! Please try again!');
         }
       }
     } catch (error: any) {
@@ -118,6 +128,69 @@ const Home = (props: HomeProps) => {
       setIsUserMinting(false);
     }
   };
+
+  const MintMultiple = async (quantity: number) => {
+    try {
+      setIsUserMinting(true);
+      if (wallet.connected && candyMachine?.program && wallet.publicKey) {
+        const signedTransactions: any = await mintMultipleToken(
+          candyMachine,
+          quantity,
+          wallet.publicKey
+        );
+
+        const promiseArray = [];
+        const txArray = [];
+
+        for (let index = 0; index < signedTransactions.length; index++) {
+          const tx = signedTransactions[index];
+          txArray.push(tx);
+          promiseArray.push(awaitTransactionSignatureConfirmation(
+            tx,
+            props.txTimeout,
+            props.connection,
+            true
+          ));
+        }
+
+        const allTransactionsResult = await Promise.all(promiseArray);
+        let totalSuccess = 0;
+        let totalFailure = 0;
+
+        for (let index = 0; index < allTransactionsResult.length; index++) {
+          const transactionStatus = allTransactionsResult[index];
+          if (!transactionStatus?.err) {
+            totalSuccess += 1;
+          } else {
+            totalFailure += 1;
+          }
+        }
+
+        toast.success(`Congratulations! Mint Successful.`, { duration: 6000});
+      }
+    } catch (error: any) {
+      let message = error.msg || "Minting failed! Please try again!";
+      if (!error.msg) {
+        if (error.message.indexOf("0x138")) {
+        } else if (error.message.indexOf("0x137")) {
+          message = `SOLD OUT!`;
+        } else if (error.message.indexOf("0x135")) {
+          message = `Insufficient funds to mint. Please fund your wallet.`;
+        }
+      } else {
+        if (error.code === 311) {
+          message = `SOLD OUT!`;
+          window.location.reload();
+        } else if (error.code === 312) {
+          message = `Minting period hasn't started yet.`;
+        }
+      }
+
+      toast.error(message);
+    } finally {
+      setIsUserMinting(false);
+    }
+  }
 
   useEffect(() => {
     refreshCandyMachineState();
@@ -210,10 +283,23 @@ const Home = (props: HomeProps) => {
                       : 'MINT IS LIVE'
                   }
                 />
+                {/* <input 
+                  min={1}
+                  max={10}
+                  disabled={
+                    candyMachine?.state.isSoldOut ||
+                    isUserMinting ||
+                    !candyMachine?.state.isActive
+                  }
+                  type="number" 
+                  className="input-number"
+                  onChange={(e) => setQuantity(Number(e.target.value))} 
+                  style={{border: 'solid 1px grey', textAlign: 'center', width: '90%', margin: 5}} 
+                  value={quantity} /> */}
                 <MintButton
                   candyMachine={candyMachine}
                   isMinting={isUserMinting}
-                  onMint={onMint}
+                  onMint={() => onMint(quantity)}
                 />
               </>
             }
