@@ -12,9 +12,7 @@ import {
   FeeCalculator,
 } from '@solana/web3.js';
 
-import {
-  WalletNotConnectedError,
-} from '@solana/wallet-adapter-base';
+import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
 
 interface BlockhashAndFeeCalculator {
   blockhash: Blockhash;
@@ -57,6 +55,73 @@ export enum SequenceType {
   StopOnFailure,
 }
 
+export async function sendTransactionsWithManualRetry(
+  connection: Connection,
+  wallet: any,
+  instructions: TransactionInstruction[][],
+  signers: Keypair[][],
+): Promise<(string | undefined)[]> {
+  let stopPoint = 0;
+  let tries = 0;
+  let lastInstructionsLength = null;
+  let toRemoveSigners: Record<number, boolean> = {};
+  instructions = instructions.filter((instr, i) => {
+    if (instr.length > 0) {
+      return true;
+    } else {
+      toRemoveSigners[i] = true;
+      return false;
+    }
+  });
+  let ids: string[] = [];
+  let filteredSigners = signers.filter((_, i) => !toRemoveSigners[i]);
+
+  while (stopPoint < instructions.length && tries < 3) {
+    instructions = instructions.slice(stopPoint, instructions.length);
+    filteredSigners = filteredSigners.slice(stopPoint, filteredSigners.length);
+
+    if (instructions.length === lastInstructionsLength) tries = tries + 1;
+    else tries = 0;
+
+    try {
+      if (instructions.length === 1) {
+        const id = await sendTransactionWithRetry(
+          connection,
+          wallet,
+          instructions[0],
+          filteredSigners[0],
+          'single',
+        );
+        ids.push(id.txid);
+        stopPoint = 1;
+      } else {
+        const { txs } = await sendTransactions(
+          connection,
+          wallet,
+          instructions,
+          filteredSigners,
+          SequenceType.StopOnFailure,
+          'single',
+        );
+        ids = ids.concat(txs.map(t => t.txid));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    console.log(
+      'Died on ',
+      stopPoint,
+      'retrying from instruction',
+      instructions[stopPoint],
+      'instructions length is',
+      instructions.length,
+    );
+    lastInstructionsLength = instructions.length;
+  }
+
+  return ids;
+}
+
 export const sendTransactions = async (
   connection: Connection,
   wallet: any,
@@ -64,8 +129,10 @@ export const sendTransactions = async (
   signersSet: Keypair[][],
   sequenceType: SequenceType = SequenceType.Parallel,
   commitment: Commitment = 'singleGossip',
+  successCallback: (txid: string, ind: number) => void = (txid, ind) => {},
+  failCallback: (reason: string, ind: number) => boolean = (txid, ind) => false,
   block?: BlockhashAndFeeCalculator,
-): Promise<string[] | number> => {
+): Promise<{ number: number; txs: { txid: string; slot: number }[] }> => {
   if (!wallet.publicKey) throw new WalletNotConnectedError();
 
   const unsignedTxns: Transaction[] = [];
@@ -109,26 +176,24 @@ export const sendTransactions = async (
     'vs handed in length',
     instructionSet.length,
   );
-
-  const txIds = []
   for (let i = 0; i < signedTxns.length; i++) {
     const signedTxnPromise = sendSignedTransaction({
       connection,
       signedTransaction: signedTxns[i],
     });
 
-    try {
-      const { txid } = await signedTxnPromise
-      txIds.push(txid)
-    } catch (error) {
-      console.error(error)
-      // @ts-ignore
-      failCallback(signedTxns[i], i);
-      if (sequenceType === SequenceType.StopOnFailure) {
-        breakEarlyObject.breakEarly = true;
-        breakEarlyObject.i = i;
-      }
-    }
+    signedTxnPromise
+      .then(({ txid, slot }) => {
+        successCallback(txid, i);
+      })
+      .catch(reason => {
+        // @ts-ignore
+        failCallback(signedTxns[i], i);
+        if (sequenceType === SequenceType.StopOnFailure) {
+          breakEarlyObject.breakEarly = true;
+          breakEarlyObject.i = i;
+        }
+      });
 
     if (sequenceType !== SequenceType.Parallel) {
       try {
@@ -137,7 +202,11 @@ export const sendTransactions = async (
         console.log('Caught failure', e);
         if (breakEarlyObject.breakEarly) {
           console.log('Died on ', breakEarlyObject.i);
-          return breakEarlyObject.i; // Return the txn we failed on by index
+          // Return the txn we failed on by index
+          return {
+            number: breakEarlyObject.i,
+            txs: await Promise.all(pendingTxns),
+          };
         }
       }
     } else {
@@ -149,7 +218,7 @@ export const sendTransactions = async (
     await Promise.all(pendingTxns);
   }
 
-  return txIds;
+  return { number: signedTxns.length, txs: await Promise.all(pendingTxns) };
 };
 
 export const sendTransaction = async (
@@ -333,7 +402,7 @@ export async function sendSignedTransaction({
       simulateResult = (
         await simulateTransaction(connection, signedTransaction, 'single')
       ).value;
-    } catch (e) { }
+    } catch (e) {}
     if (simulateResult && simulateResult.err) {
       if (simulateResult.logs) {
         for (let i = simulateResult.logs.length - 1; i >= 0; --i) {

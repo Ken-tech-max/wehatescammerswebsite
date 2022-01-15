@@ -1,20 +1,133 @@
 import Head from 'next/head'
-import { Fragment, useState, useRef, useEffect } from "react";
-import { Toaster } from 'react-hot-toast';
+import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { useWallet } from "@solana/wallet-adapter-react";
-import useCandyMachine from '../hooks/use-candy-machine';
+import { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import useWalletBalance from '../hooks/use-wallet-balance';
-import Countdown from 'react-countdown';
 import Link from 'next/link';
+import * as anchor from '@project-serum/anchor';
+import { MintButton } from '../components/mint-button';
+import {
+  awaitTransactionSignatureConfirmation,
+  CandyMachineAccount,
+  getCandyMachineState,
+  mintOneToken,
+} from '../utils/candy-machine';
+import { toDate, getMintPrice } from '../utils/util';
+import { MintCountdown } from '../components/mint-countdown';
 
-const Home = () => {
+export interface HomeProps {
+  candyMachineId?: anchor.web3.PublicKey;
+  connection: anchor.web3.Connection;
+  startDate: number;
+  txTimeout: number;
+  rpcHost: string;
+}
+
+const Home = (props: HomeProps) => {
+  const [isUserMinting, setIsUserMinting] = useState(false);
+  const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
+
+  const rpcUrl = props.rpcHost;
   const wallet = useWallet();
-  const [balance] = useWalletBalance();
-  const [isActive, setIsActive] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const { isSoldOut, mintStartDate, isMinting, onMintNFT, nftsData } = useCandyMachine();
+
+  const anchorWallet = useMemo(() => {
+    if (
+      !wallet ||
+      !wallet.publicKey ||
+      !wallet.signAllTransactions ||
+      !wallet.signTransaction
+    ) {
+      return;
+    }
+
+    return {
+      publicKey: wallet.publicKey,
+      signAllTransactions: wallet.signAllTransactions,
+      signTransaction: wallet.signTransaction,
+    } as anchor.Wallet;
+  }, [wallet]);
+
+  const refreshCandyMachineState = useCallback(async () => {
+    if (!anchorWallet) {
+      return;
+    }
+
+    if (props.candyMachineId) {
+      try {
+        const cndy = await getCandyMachineState(
+          anchorWallet,
+          props.candyMachineId,
+          props.connection,
+        );
+        setCandyMachine(cndy);
+      } catch (e) {
+        console.log('There was a problem fetching Candy Machine state');
+        console.log(e);
+      }
+    }
+  }, [anchorWallet, props.candyMachineId, props.connection]);
+
+  const onMint = async () => {
+    try {
+      setIsUserMinting(true);
+      document.getElementById('#identity')?.click();
+      if (wallet.connected && candyMachine?.program && wallet.publicKey) {
+        const mintTxId = (
+          await mintOneToken(candyMachine, wallet.publicKey)
+        )[0];
+
+        let status: any = { err: true };
+        if (mintTxId) {
+          status = await awaitTransactionSignatureConfirmation(
+            mintTxId,
+            props.txTimeout,
+            props.connection,
+            true,
+          );
+        }
+
+        if (status && !status.err) {
+          toast.success('Congratulations! Mint succeeded!');
+        } else {
+          toast.success('Mint failed! Please try again!');
+        }
+      }
+    } catch (error: any) {
+      let message = error.msg || 'Minting failed! Please try again!';
+      if (!error.msg) {
+        if (!error.message) {
+          message = 'Transaction Timeout! Please try again.';
+        } else if (error.message.indexOf('0x137')) {
+          message = `SOLD OUT!`;
+        } else if (error.message.indexOf('0x135')) {
+          message = `Insufficient funds to mint. Please fund your wallet.`;
+        }
+      } else {
+        if (error.code === 311) {
+          message = `SOLD OUT!`;
+          window.location.reload();
+        } else if (error.code === 312) {
+          message = `Minting period hasn't started yet.`;
+        }
+      }
+
+      toast.error(message);
+    } finally {
+      setIsUserMinting(false);
+    }
+  };
+
+  useEffect(() => {
+    refreshCandyMachineState();
+  }, [
+    anchorWallet,
+    props.candyMachineId,
+    props.connection,
+    refreshCandyMachineState,
+  ]);
+
   const [imageIndex, setImageIndex] = useState(1);
   const [activeFaqIndex, setActiveFaqIndex] = useState(-1);
 
@@ -65,73 +178,49 @@ const Home = () => {
       </section>
 
       <section ref={mintRef}>
-        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Galaxy Shuttle Pass</h3>
+        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Galaxy Galaxy</h3>
         <div className="flex flex-row justify-center items-center space-x-10 px-5">
           <div className="flex flex-col justify-center items-center space-y-3">
-
-            {!wallet.connected && 
-              <span
-                className="text-gray-800 font-bold text-2xl cursor-default">
-                Wallet not connected.
-                <br />
-                Please select wallet...
-
-                {/* Coming soon... */}
-              </span>
-            }
-
-            {wallet.connected && isActive &&
+            {wallet.connected &&
               <>
-                <p className="text-white font-bold text-lg cursor-default text-center">Price 1 SOL</p>
-                <p className="text-white font-bold text-lg cursor-default text-center">Minted / Total <br /> {nftsData.itemsRedeemed} / {nftsData.itemsAvailable}</p>
+                {candyMachine && 
+                  <>
+                    <div className="text-center text-white">
+                      Minted / Total : {`${candyMachine?.state.itemsRemaining} / ${candyMachine?.state.itemsAvailable}`}
+                    </div>
+                    <div className="text-center text-white">
+                      Price : {getMintPrice(candyMachine)} SOL
+                    </div>
+                  </>
+                }
+                <MintCountdown
+                  date={toDate(
+                    candyMachine?.state.goLiveDate
+                      ? candyMachine?.state.goLiveDate
+                      : candyMachine?.state.isPresale
+                      ? new anchor.BN(new Date().getTime() / 1000)
+                      : undefined,
+                  )}
+                  style={{ justifyContent: 'flex-end' }}
+                  status={
+                    !candyMachine?.state?.isActive || candyMachine?.state?.isSoldOut
+                      ? 'COMPLETED'
+                      : candyMachine?.state.isPresale
+                      ? 'PRESALE'
+                      : 'MINT IS LIVE'
+                  }
+                />
+                <MintButton
+                  candyMachine={candyMachine}
+                  isMinting={isUserMinting}
+                  onMint={onMint}
+                />
               </>
             }
-
-            <div className="flex flex-col justify-start items-start">
-              {wallet.connected &&
-                <>
-                  {/* {isActive &&
-                    <input 
-                      min={1}
-                      max={10}
-                      type="number" 
-                      className="input-number"
-                      onChange={(e) => setQuantity(Number(e.target.value))} 
-                      style={{border: 'solid 1px grey', textAlign: 'center', width: '90%', margin: 5}} 
-                      value={quantity} />
-                  } */}
-
-                  <button
-                    disabled={isSoldOut || isMinting || !isActive}
-                    onClick={() => onMintNFT(quantity)}
-                    className="inline-block button-connect flex justify-center items-center mt-5"
-                  >
-                    {isSoldOut ? 
-                        ("SOLD OUT") 
-                      : isActive ?
-                          isMinting ? 
-                            <div className="loader"></div>
-                          : 
-                            <span>
-                              MINT 
-                              {/* {quantity} */}
-                            </span>
-                        :
-                        <Countdown
-                          date={mintStartDate}
-                          onMount={({ completed }) => completed && setIsActive(true)}
-                          onComplete={() => setIsActive(true)}
-                          renderer={renderCounter}
-                        />
-                    }
-                  </button>
-                </>
-              }
-            </div>
           </div>
           <div className="flex justify-center items-center outer-glow">
-            {/* <img src={`/images/art${imageIndex}.png`} width={200} /> */}
-            <img src='/images/shuttle_pass.gif' width={200} />
+            <img src={`/images/art${imageIndex}.png`} width={200} />
+            {/* <img src='/images/shuttle_pass.gif' width={200} /> */}
           </div>
         </div>
       </section>
@@ -306,7 +395,7 @@ const Home = () => {
 
       <Footer />
 
-      {(wallet.connected && isMinting) &&
+      {(wallet.connected && isUserMinting) &&
         <div className="w-full h-full fixed block top-0 left-0 bg-black opacity-75 z-50 flex justify-center items-center">
           <div
             className="
@@ -320,16 +409,6 @@ const Home = () => {
         </div>
       }
     </main>
-  );
-};
-
-const renderCounter = ({ days, hours, minutes, seconds }: any) => {
-  return (
-    <div className="panel-mint-timer">
-      <span>
-        Live in {days > 0 && <span>{days}d</span>} {hours}:{minutes}:{seconds} 
-      </span>
-    </div>
   );
 };
 
