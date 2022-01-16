@@ -36,14 +36,15 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
             <span>
               {hours < 10 ? `0${hours}` : hours}
             </span>
+            <span> h </span>
             <span>
               {minutes < 10 ? `0${minutes}` : minutes}
             </span>
-            <span>mins</span>
+            <span> m </span>
             <span>
               {seconds < 10 ? `0${seconds}` : seconds}
             </span>
-            <span>secs</span>
+            <span> s </span>
         </div>
       );
     }
