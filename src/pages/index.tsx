@@ -259,10 +259,10 @@ const Home = (props: HomeProps) => {
                 {candyMachine && 
                   <>
                     <div className="text-center text-white">
-                      Minted / Total : {`${candyMachine?.state.itemsRemaining} / ${candyMachine?.state.itemsAvailable}`}
+                      Minted / Total {`${candyMachine?.state.itemsRemaining} / ${candyMachine?.state.itemsAvailable}`}
                     </div>
                     <div className="text-center text-white">
-                      Price : {getMintPrice(candyMachine)} SOL
+                      Price {getMintPrice(candyMachine)} SOL
                     </div>
                   </>
                 }
