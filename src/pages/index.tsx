@@ -251,7 +251,7 @@ const Home = (props: HomeProps) => {
       </section>
 
       <section ref={mintRef}>
-        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Galaxy Galaxy</h3>
+        <h3 className="text-white text-center presale-title drop-shadow-lg pb-10">Mint a Genesis Gorilla</h3>
         <div className="flex flex-row justify-center items-center space-x-10 px-5">
           <div className="flex flex-col justify-center items-center space-y-3">
             {wallet.connected &&
