@@ -19,6 +19,12 @@ const Footer: React.FC = () => {
         </div>
       </a>
 
+      <div className="w-full flex flex-row justify-center items-center">
+        <a href="https://nftsolana.io" target="_blank" className="inline-flex text-center justify-center items-center">
+          <img src={'/images/nft_logo.png'} width="55%" />
+        </a>
+      </div>
+
       <p className="text-white text-center">Copyright © 2021, All rights reserved.</p>
     </div>
   </div>;
