@@ -337,14 +337,12 @@ const useNftStake = () => {
             }
 
             setIsLoading(true);
-
             const poolDataForOwner: any = await getPoolData(anchorWallet);
             setPoolData(poolDataForOwner);
             const stakedNftsForOwner = await getStakedNftsForOwner(anchorWallet);
             setStakedNfts(stakedNftsForOwner);
             const claimAmountForOwner = Math.floor(await getClaimAmount(anchorWallet));
             setClaimAmount(claimAmountForOwner);
-
             setIsLoading(false);
         })();
     }, [anchorWallet, balance]);
