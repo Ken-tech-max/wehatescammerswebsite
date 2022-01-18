@@ -340,7 +340,7 @@ const Home = (props: HomeProps) => {
           <div className="phase-panel w-full md:w-5/6">
             <div className="my-10 flex flex-col space-y-4">
               <h5 className="text-color-theme presale-desc mb-5">
-                Q1 - 2022
+                Q1 2022
               </h5>
               <p className="text-white overview-desc">
                 - Genesis mint 02/02/2022
