@@ -338,43 +338,67 @@ const Home = (props: HomeProps) => {
         <h5 className="text-white presale-title drop-shadow-lg text-center pb-10">Gorilla Ops</h5>
         <div className="w-full flex flex-col px-5 md:px-10 justify-center items-center">
           <div className="phase-panel w-full md:w-5/6">
-            <div className="my-10">
+            <div className="my-10 flex flex-col space-y-4">
               <h5 className="text-color-theme presale-desc mb-5">
-                25% - GGG Giveaway
+                Q1 - 2022
               </h5>
               <p className="text-white overview-desc">
-                10x 5 SOL giveaway back to the minters of the collection.
+                - Genesis mint 02/02/2022
+              </p>
+              <p className="text-white overview-desc">
+                - Launch of staking $GLUE token
+              </p>
+              <p className="text-white overview-desc">
+                - Gorilla Galaxy: Companion Collection mint (Free to holders, minted with $GLUE token)
+              </p>
+              <p className="text-white overview-desc">
+                - Development of Gorilla Galaxy Arcade Begins
               </p>
             </div>
 
-            <div className="my-10">
+            <div className="my-10 flex flex-col space-y-4">
               <h5 className="text-color-theme presale-desc mb-5">
-                50% - Chimp Change
+                Q2 2022
               </h5>
               <p className="text-white overview-desc">
-                250 SOL is added to the community wallet. The community wallet will be used for various purposes decided by Gorilla Galaxy: Genesis holders. 
+                - Gorilla Galaxy Arcade launch wagers of SOL GLUE open
+              </p>
+              <p className="text-white overview-desc">
+                - Revenue from the Arcade is collected to be shared with Genesis holders
+              </p>
+              <p className="text-white overview-desc">
+                - Gorilla Galaxy: Generation 2 is announced
               </p>
             </div>
 
-            <div className="my-10">
+            <div className="my-10 flex flex-col space-y-4">
               <h5 className="text-color-theme presale-desc mb-5">
-                75% - $GLUE
+                Q3 2022
               </h5>
               <p className="text-white overview-desc">
-                $GLUE token research and integration begins. This will be distributed to all Gorilla Galaxy: Genesis holders. Details TBA.
+                - First revenue share from the Arcade is distributed to Genesis holders
+              </p>
+              <p className="text-white overview-desc">
+                - Generation 3 emerges via breeding between Genesis Generation 2
               </p>
             </div>
 
-            <div className="my-10">
+            <div className="my-10 flex flex-col space-y-4">
               <h5 className="text-color-theme presale-desc mb-5">
-                100% - Enter the Gorillaverse
+                Q4 2022
               </h5>
               <p className="text-white overview-desc">
-                3D versions of all Genesis Gorillas will begin to roll out. These will be claimable with the $GLUE token.
+                - Gorilla Galaxy P2E Game announcement
+              </p>
+              <p className="text-white overview-desc">
+                - Gameplay sneak peeks
+              </p>
+              <p className="text-white overview-desc">
+                - Continuous revenue share airdrops from the Arcade
               </p>
             </div>
 
-            <div className="my-10">
+            {/* <div className="my-10">
               <p className="text-white overview-desc">
                 <br />
                 <br />
@@ -383,7 +407,7 @@ const Home = (props: HomeProps) => {
                 <br />
                 More to come with Gorilla Ops v2.0....
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
