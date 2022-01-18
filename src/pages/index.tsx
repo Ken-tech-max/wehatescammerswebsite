@@ -346,7 +346,7 @@ const Home = (props: HomeProps) => {
                 - Genesis mint 02/02/2022
               </p>
               <p className="text-white overview-desc">
-                - Launch of staking $GLUE token
+                - Launch of staking & $GLUE token
               </p>
               <p className="text-white overview-desc">
                 - Gorilla Galaxy: Companion Collection mint (Free to holders, minted with $GLUE token)
@@ -361,7 +361,7 @@ const Home = (props: HomeProps) => {
                 Q2 2022
               </h5>
               <p className="text-white overview-desc">
-                - Gorilla Galaxy Arcade launch wagers of SOL GLUE open
+                - Gorilla Galaxy Arcade launch wagers of SOL & GLUE open
               </p>
               <p className="text-white overview-desc">
                 - Revenue from the Arcade is collected to be shared with Genesis holders
@@ -379,7 +379,7 @@ const Home = (props: HomeProps) => {
                 - First revenue share from the Arcade is distributed to Genesis holders
               </p>
               <p className="text-white overview-desc">
-                - Generation 3 emerges via breeding between Genesis Generation 2
+                - Generation 3 emerges via breeding between Genesis & Generation 2
               </p>
             </div>
 
