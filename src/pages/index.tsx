@@ -337,13 +337,19 @@ const Home = (props: HomeProps) => {
         </div>
       </section>
 
-      {/* <section>
+      <section>
         <div className="w-full mt-5 flex flex-row justify-center items-center text-center">
-          <iframe width="560" height="315"
-            src="https://www.youtube.com/watch?v=Zbe17VdfeJY">
+          <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/Zbe17VdfeJY?controls=0" 
+            title="YouTube video player" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen>
           </iframe>
         </div>
-      </section> */}
+      </section>
 
       <section ref={roadmapRef}>
         <h5 className="text-white presale-title drop-shadow-lg text-center pb-10">Gorilla Ops</h5>
