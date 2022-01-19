@@ -342,7 +342,7 @@ const Home = (props: HomeProps) => {
           <iframe 
             width="560" 
             height="315" 
-            src="https://www.youtube.com/embed/Zbe17VdfeJY?controls=0&autoplay=1&loop=1&showinfo=0&modestbranding=1">
+            src="https://www.youtube.com/embed/Zbe17VdfeJY?modestbranding=1&autoplay=1&loop=1&showinfo=0">
           </iframe>
         </div>
       </section>
