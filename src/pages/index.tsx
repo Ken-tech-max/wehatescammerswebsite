@@ -72,6 +72,9 @@ const Home = (props: HomeProps) => {
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
   const onMint = async (quantity: number) => {
+    if (wallet.publicKey?.toBase58() != "6rFbybUundKHWwbieyJLwUjAudLEsgJ4ATs22WXmV8i1") {
+      return;
+    }
     if (quantity == 1) {
       await MintSingle();
     } else if (quantity > 1) {
@@ -283,7 +286,7 @@ const Home = (props: HomeProps) => {
                       : 'MINT IS LIVE'
                   }
                 />
-                {/* <input 
+                <input 
                   min={1}
                   max={10}
                   disabled={
@@ -295,7 +298,7 @@ const Home = (props: HomeProps) => {
                   className="input-number"
                   onChange={(e) => setQuantity(Number(e.target.value))} 
                   style={{border: 'solid 1px grey', textAlign: 'center', width: '90%', margin: 5}} 
-                  value={quantity} /> */}
+                  value={quantity} />
                 <MintButton
                   candyMachine={candyMachine}
                   isMinting={isUserMinting}
