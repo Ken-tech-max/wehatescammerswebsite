@@ -337,6 +337,14 @@ const Home = (props: HomeProps) => {
         </div>
       </section>
 
+      <section>
+        <div className="w-full mt-5 flex flex-row justify-center items-center text-center">
+          <iframe width="560" height="315"
+            src="https://youtu.be/Zbe17VdfeJY">
+          </iframe>
+        </div>
+      </section>
+
       <section ref={roadmapRef}>
         <h5 className="text-white presale-title drop-shadow-lg text-center pb-10">Gorilla Ops</h5>
         <div className="w-full flex flex-col px-5 md:px-10 justify-center items-center">
