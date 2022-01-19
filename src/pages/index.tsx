@@ -340,7 +340,7 @@ const Home = (props: HomeProps) => {
       <section>
         <div className="w-full mt-5 flex flex-row justify-center items-center text-center">
           <iframe width="560" height="315"
-            src="https://youtu.be/Zbe17VdfeJY">
+            src="https://www.youtube.com/watch?v=Zbe17VdfeJY">
           </iframe>
         </div>
       </section>
