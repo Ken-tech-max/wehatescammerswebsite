@@ -340,9 +340,12 @@ const Home = (props: HomeProps) => {
       <section>
         <div className="w-full mt-5 flex flex-row justify-center items-center text-center">
           <iframe 
-            width="560" 
+            width="560"  
             height="315" 
-            src="https://www.youtube.com/embed/Zbe17VdfeJY?modestbranding=1&autoplay=1&loop=1&showinfo=0">
+            src="https://www.youtube.com/embed/kJQP7kiw5Fk?controls=0" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; modestbranding; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen>
           </iframe>
         </div>
       </section>
