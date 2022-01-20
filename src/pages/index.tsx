@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Toaster } from 'react-hot-toast';
+import ReactPlayer from 'react-player'
 import toast from 'react-hot-toast';
 import Header from '../components/header';
 import Footer from '../components/footer';
@@ -339,14 +340,20 @@ const Home = (props: HomeProps) => {
 
       <section>
         <div className="w-full mt-5 flex flex-row justify-center items-center text-center">
-          <iframe 
-            width="560"  
-            height="315" 
-            src="https://www.youtube.com/embed/kJQP7kiw5Fk?controls=0" 
-            frameBorder="0" 
-            allow="accelerometer; autoplay; modestbranding; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen>
-          </iframe>
+          <ReactPlayer url='https://www.youtube.com/embed/Zbe17VdfeJY'
+            playing
+            config={
+              {
+                youtube: {
+                  playerVars: {
+                  controls: 0,
+                  modestbranding: 1,
+                  autoplay: 1,
+                  loop: 1
+                },
+              },
+            }}
+          />
         </div>
       </section>
 
