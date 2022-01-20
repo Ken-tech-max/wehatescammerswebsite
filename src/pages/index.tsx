@@ -341,18 +341,23 @@ const Home = (props: HomeProps) => {
       <section>
         <div className="w-full mt-5 flex flex-row justify-center items-center text-center">
           <ReactPlayer url='https://www.youtube.com/embed/Zbe17VdfeJY'
-            playing
             config={
               {
                 youtube: {
                   playerVars: {
-                  controls: 0,
-                  modestbranding: 1,
-                  autoplay: 1,
-                  loop: 1
+                    autoplay: 1,
+                    modestbranding: 1,
+                    rel: 0
+                  },
                 },
-              },
-            }}
+              }
+            }
+            playsinline={true}
+            playing={true}
+            muted={true}
+            volume={0}
+            loop={true}
+            controls={false}
           />
         </div>
       </section>
