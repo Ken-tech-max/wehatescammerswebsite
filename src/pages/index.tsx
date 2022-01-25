@@ -471,7 +471,7 @@ const Home = (props: HomeProps) => {
                     <div>Mint price?</div>
                     <div className='faq-icon'>{activeFaqIndex == 3 ? <img src={'/images/icon_faq_active.png'} width='20' /> : <img src={'/images/icon_faq.png'} width='12' />}</div>
                 </div>
-                <div className={activeFaqIndex == 3 ? 'active-faq-content' : 'faq-content'}>Genesis gorillas will cost 0.77 SOL each to mint.</div>
+                <div className={activeFaqIndex == 3 ? 'active-faq-content' : 'faq-content'}>OG & Whitelist = 1.5 SOL Public = 2 SOL</div>
             </div>
             <div className={activeFaqIndex == 4 ? 'faq active-faq' : 'faq'}>
                 <div className='faq-header' onClick={() => handleFaq(4)}>
