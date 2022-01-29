@@ -18,6 +18,7 @@ import {
 } from '../utils/candy-machine';
 import { toDate, getMintPrice } from '../utils/util';
 import { MintCountdown } from '../components/mint-countdown';
+import { WHITELIST } from '../utils/whitelist';
 
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey;
@@ -72,10 +73,15 @@ const Home = (props: HomeProps) => {
     }
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
+  const checkWhitelist = () => {
+    return WHITELIST.includes(wallet.publicKey?.toBase58() || '');
+  }
+
   const onMint = async (quantity: number) => {
-    // if (wallet.publicKey?.toBase58() != "6rFbybUundKHWwbieyJLwUjAudLEsgJ4ATs22WXmV8i1") {
-    //   return;
-    // }
+    if (!checkWhitelist()) {
+      toast.error('You are not in whitelist.');
+      return;
+    }
     if (quantity == 1) {
       await MintSingle();
     } else if (quantity > 1) {
