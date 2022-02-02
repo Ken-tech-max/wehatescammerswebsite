@@ -44,6 +44,7 @@ export const WHITELIST_OG = [
 ];
 
 export const WHITELIST_WL = [
+    "HdoK2gNPenyuPKzM6N94hcYoCrxhQgisnXTtgmbWi9hn",
     "7jJdrPKd6daGzuzWkBDFieuaLdT2zao45udWoogt2Hb4",
     "3ye4UPMuGatGK2196dXV1ejrcENuhoALV4tj7QxtYP2Y",
     "BwwtBAgCc4tQc1MYuaeCLEBUP679xDB9EcipSDYgpVxK",
