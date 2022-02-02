@@ -106,11 +106,11 @@ const Home = (props: HomeProps) => {
     //   return;
     // }
 
-    const holdLimit = await checkHoldCountLimit();
-    if (!holdLimit) {
-      toast.error(`You can't mint more than ${MAX_HOLD_COUNT_PB} GGs.`);
-      return;
-    }
+    // const holdLimit = await checkHoldCountLimit();
+    // if (!holdLimit) {
+    //   toast.error(`You can't mint more than ${MAX_HOLD_COUNT_PB} GGs.`);
+    //   return;
+    // }
 
     if (quantity == 1) {
       await MintSingle();
