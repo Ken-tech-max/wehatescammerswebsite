@@ -13,12 +13,14 @@ import {
   awaitTransactionSignatureConfirmation,
   CandyMachineAccount,
   getCandyMachineState,
+  getNftHoldCount,
   mintMultipleToken,
   mintOneToken,
 } from '../utils/candy-machine';
 import { toDate, getMintPrice } from '../utils/util';
 import { MintCountdown } from '../components/mint-countdown';
 import { WHITELIST } from '../utils/whitelist';
+import { MAX_HOLD_COUNT } from '../utils/constant';
 
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey;
@@ -34,6 +36,7 @@ const Home = (props: HomeProps) => {
   const [quantity, setQuantity] = useState(1);
 
   const rpcUrl = props.rpcHost;
+  const connection = new anchor.web3.Connection(rpcUrl);
   const wallet = useWallet();
 
   const anchorWallet = useMemo(() => {
@@ -77,11 +80,29 @@ const Home = (props: HomeProps) => {
     return WHITELIST.includes(wallet.publicKey?.toBase58() || '');
   }
 
+  const checkHoldCountLimit = async () => {
+    if (!wallet || !wallet.publicKey) return false;
+    setIsUserMinting(true);
+    const holdCount = await getNftHoldCount(connection, wallet.publicKey);
+    setIsUserMinting(false);
+    if (holdCount >= MAX_HOLD_COUNT) {
+      return false;
+    }
+    return true;
+  }
+
   const onMint = async (quantity: number) => {
     if (!checkWhitelist()) {
       toast.error('You are not in whitelist.');
       return;
     }
+
+    const holdLimit = await checkHoldCountLimit();
+    if (!holdLimit) {
+      toast.error(`You can't mint more than ${MAX_HOLD_COUNT} GGs.`);
+      return;
+    }
+
     if (quantity == 1) {
       await MintSingle();
     } else if (quantity > 1) {

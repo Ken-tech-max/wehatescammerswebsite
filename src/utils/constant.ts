@@ -1,6 +1,5 @@
 export const COLLECTION_SYMBOL = "Gorilla";
-export const SHUTTLE_PASS_SYMBOL_NAME = "Shuttle";
-export const SHUTTLE_PASS_MAX_HOLD_COUNT = 3;
+export const MAX_HOLD_COUNT = 3;
 
 export const STAKE_STATUS = {
     UNSTAKED:   0,
