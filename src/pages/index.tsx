@@ -86,14 +86,14 @@ const Home = (props: HomeProps) => {
     const holdCount = await getNftHoldCount(connection, wallet.publicKey);
     setIsUserMinting(false);
 
-    let maxHoldCount = 0;
-    if (WHITELIST_OG.includes(wallet.publicKey?.toBase58() || '')) {
-      maxHoldCount = MAX_HOLD_COUNT_OG;
-    } else if (WHITELIST_WL.includes(wallet.publicKey?.toBase58() || '')) {
-      maxHoldCount = MAX_HOLD_COUNT_WL;
-    } else {
-      maxHoldCount = MAX_HOLD_COUNT_PB;
-    }
+    let maxHoldCount = MAX_HOLD_COUNT_PB;
+    // if (WHITELIST_OG.includes(wallet.publicKey?.toBase58() || '')) {
+    //   maxHoldCount = MAX_HOLD_COUNT_OG;
+    // } else if (WHITELIST_WL.includes(wallet.publicKey?.toBase58() || '')) {
+    //   maxHoldCount = MAX_HOLD_COUNT_WL;
+    // } else {
+    //   maxHoldCount = MAX_HOLD_COUNT_PB;
+    // }
     if (holdCount >= maxHoldCount) {
       return false;
     }
@@ -101,14 +101,14 @@ const Home = (props: HomeProps) => {
   }
 
   const onMint = async (quantity: number) => {
-    if (!checkWhitelist()) {
-      toast.error('You are not in whitelist.');
-      return;
-    }
+    // if (!checkWhitelist()) {
+    //   toast.error('You are not in whitelist.');
+    //   return;
+    // }
 
     const holdLimit = await checkHoldCountLimit();
     if (!holdLimit) {
-      toast.error(`You can't mint more GGs.`);
+      toast.error(`You can't mint more than ${MAX_HOLD_COUNT_PB} GGs.`);
       return;
     }
 
