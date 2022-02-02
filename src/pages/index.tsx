@@ -19,8 +19,8 @@ import {
 } from '../utils/candy-machine';
 import { toDate, getMintPrice } from '../utils/util';
 import { MintCountdown } from '../components/mint-countdown';
-import { WHITELIST } from '../utils/whitelist';
-import { MAX_HOLD_COUNT } from '../utils/constant';
+import { WHITELIST_OG, WHITELIST_WL } from '../utils/whitelist';
+import { MAX_HOLD_COUNT_OG, MAX_HOLD_COUNT_WL, MAX_HOLD_COUNT_PB } from '../utils/constant';
 
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey;
@@ -77,7 +77,7 @@ const Home = (props: HomeProps) => {
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
   const checkWhitelist = () => {
-    return WHITELIST.includes(wallet.publicKey?.toBase58() || '');
+    return WHITELIST_OG.includes(wallet.publicKey?.toBase58() || '') || WHITELIST_WL.includes(wallet.publicKey?.toBase58() || '');
   }
 
   const checkHoldCountLimit = async () => {
@@ -85,7 +85,16 @@ const Home = (props: HomeProps) => {
     setIsUserMinting(true);
     const holdCount = await getNftHoldCount(connection, wallet.publicKey);
     setIsUserMinting(false);
-    if (holdCount >= MAX_HOLD_COUNT) {
+
+    let maxHoldCount = 0;
+    if (WHITELIST_OG.includes(wallet.publicKey?.toBase58() || '')) {
+      maxHoldCount = MAX_HOLD_COUNT_OG;
+    } else if (WHITELIST_WL.includes(wallet.publicKey?.toBase58() || '')) {
+      maxHoldCount = MAX_HOLD_COUNT_WL;
+    } else {
+      maxHoldCount = MAX_HOLD_COUNT_PB;
+    }
+    if (holdCount >= maxHoldCount) {
       return false;
     }
     return true;
@@ -99,7 +108,7 @@ const Home = (props: HomeProps) => {
 
     const holdLimit = await checkHoldCountLimit();
     if (!holdLimit) {
-      toast.error(`You can't mint more than ${MAX_HOLD_COUNT} GGs.`);
+      toast.error(`You can't mint more GGs.`);
       return;
     }
 
