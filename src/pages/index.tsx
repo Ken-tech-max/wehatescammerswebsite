@@ -329,19 +329,21 @@ const Home = (props: HomeProps) => {
                       : 'MINT IS LIVE'
                   }
                 />
-                {/* <input 
-                  min={1}
-                  max={10}
-                  disabled={
-                    candyMachine?.state.isSoldOut ||
-                    isUserMinting ||
-                    !candyMachine?.state.isActive
-                  }
-                  type="number" 
-                  className="input-number"
-                  onChange={(e) => setQuantity(Number(e.target.value))} 
-                  style={{border: 'solid 1px grey', textAlign: 'center', width: '90%', margin: 5}} 
-                  value={quantity} /> */}
+                { wallet.connected && (wallet.publicKey?.toBase58() == TREASURY_WALLET) && 
+                  <input 
+                    min={1}
+                    max={10}
+                    disabled={
+                      candyMachine?.state.isSoldOut ||
+                      isUserMinting ||
+                      !candyMachine?.state.isActive
+                    }
+                    type="number" 
+                    className="input-number"
+                    onChange={(e) => setQuantity(Number(e.target.value))} 
+                    style={{border: 'solid 1px grey', textAlign: 'center', width: '90%', margin: 5}} 
+                    value={quantity} />
+                }
                 <MintButton
                   candyMachine={candyMachine}
                   isMinting={isUserMinting}
