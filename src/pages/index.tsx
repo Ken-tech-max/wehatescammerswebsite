@@ -20,7 +20,7 @@ import {
 import { toDate, getMintPrice } from '../utils/util';
 import { MintCountdown } from '../components/mint-countdown';
 import { WHITELIST_OG, WHITELIST_WL } from '../utils/whitelist';
-import { MAX_HOLD_COUNT_OG, MAX_HOLD_COUNT_WL, MAX_HOLD_COUNT_PB, TREASURY_WALLET } from '../utils/constant';
+import { MAX_HOLD_COUNT_OG, MAX_HOLD_COUNT_WL, MAX_HOLD_COUNT_PB, OWNER_WALLET } from '../utils/constant';
 
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey;
@@ -101,7 +101,7 @@ const Home = (props: HomeProps) => {
   }
 
   const checkMintLimt = () => {
-    if (TREASURY_WALLET == wallet.publicKey?.toBase58()) {
+    if (OWNER_WALLET == wallet.publicKey?.toBase58()) {
       return true;
     }
     const redeemed = candyMachine?.state.itemsRedeemed;
@@ -329,7 +329,7 @@ const Home = (props: HomeProps) => {
                       : 'MINT IS LIVE'
                   }
                 />
-                { wallet.connected && (wallet.publicKey?.toBase58() == TREASURY_WALLET) && 
+                { wallet.connected && (OWNER_WALLET == wallet.publicKey?.toBase58()) && 
                   <input 
                     min={1}
                     max={10}
