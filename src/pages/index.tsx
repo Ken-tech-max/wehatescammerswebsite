@@ -20,7 +20,7 @@ import {
 import { toDate, getMintPrice } from '../utils/util';
 import { MintCountdown } from '../components/mint-countdown';
 import { WHITELIST_OG, WHITELIST_WL } from '../utils/whitelist';
-import { MAX_HOLD_COUNT_OG, MAX_HOLD_COUNT_WL, MAX_HOLD_COUNT_PB } from '../utils/constant';
+import { MAX_HOLD_COUNT_OG, MAX_HOLD_COUNT_WL, MAX_HOLD_COUNT_PB, TREASURY_WALLET } from '../utils/constant';
 
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey;
@@ -87,30 +87,35 @@ const Home = (props: HomeProps) => {
     setIsUserMinting(false);
 
     let maxHoldCount = MAX_HOLD_COUNT_PB;
-    // if (WHITELIST_OG.includes(wallet.publicKey?.toBase58() || '')) {
-    //   maxHoldCount = MAX_HOLD_COUNT_OG;
-    // } else if (WHITELIST_WL.includes(wallet.publicKey?.toBase58() || '')) {
-    //   maxHoldCount = MAX_HOLD_COUNT_WL;
-    // } else {
-    //   maxHoldCount = MAX_HOLD_COUNT_PB;
-    // }
+    if (WHITELIST_OG.includes(wallet.publicKey?.toBase58() || '')) {
+      maxHoldCount = MAX_HOLD_COUNT_OG;
+    } else if (WHITELIST_WL.includes(wallet.publicKey?.toBase58() || '')) {
+      maxHoldCount = MAX_HOLD_COUNT_WL;
+    } else {
+      maxHoldCount = MAX_HOLD_COUNT_PB;
+    }
     if (holdCount >= maxHoldCount) {
       return false;
     }
     return true;
   }
 
-  const onMint = async (quantity: number) => {
-    // if (!checkWhitelist()) {
-    //   toast.error('You are not in whitelist.');
-    //   return;
-    // }
+  const checkMintLimt = () => {
+    if (TREASURY_WALLET == wallet.publicKey?.toBase58()) {
+      return true;
+    }
+    const redeemed = candyMachine?.state.itemsRedeemed;
+    if (redeemed && redeemed < 1111) {
+      return true;
+    }
+    return false;
+  }
 
-    // const holdLimit = await checkHoldCountLimit();
-    // if (!holdLimit) {
-    //   toast.error(`You can't mint more than ${MAX_HOLD_COUNT_PB} GGs.`);
-    //   return;
-    // }
+  const onMint = async (quantity: number) => {
+    if (!checkMintLimt()) {
+      toast.error('Public mint is stopped for now. Stay tunned.');
+      return;
+    }
 
     if (quantity == 1) {
       await MintSingle();
