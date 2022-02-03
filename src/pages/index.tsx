@@ -105,7 +105,8 @@ const Home = (props: HomeProps) => {
       return true;
     }
     const redeemed = candyMachine?.state.itemsRedeemed;
-    if (redeemed && redeemed < 1111) {
+    const available = candyMachine?.state.itemsAvailable;
+    if (redeemed && available && redeemed < available) {
       return true;
     }
     return false;
@@ -304,7 +305,7 @@ const Home = (props: HomeProps) => {
                 {candyMachine && 
                   <>
                     <div className="text-center text-white">
-                      Minted / Total {`${candyMachine?.state.itemsRedeemed} / 1111`}
+                      Minted / Total {`${candyMachine?.state.itemsRedeemed} / ${candyMachine?.state.itemsAvailable}`}
                     </div>
                     <div className="text-center text-white">
                       Price {getMintPrice(candyMachine)} SOL
