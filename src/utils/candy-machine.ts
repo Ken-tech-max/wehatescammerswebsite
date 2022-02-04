@@ -14,7 +14,7 @@ import {
   getNetworkToken,
   SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
 } from './util';
-import { AIRDROP_COUNT, COLLECTION_SYMBOL } from './constant';
+import { COLLECTION_SYMBOL } from './constant';
 
 export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
   'cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ',
@@ -174,9 +174,7 @@ export const getCandyMachineState = async (
   const state: any = await program.account.candyMachine.fetch(candyMachineId);
   // const itemsAvailable = state.data.itemsAvailable.toNumber();
   const itemsAvailable = 1111;
-  let fakeNumber = AIRDROP_COUNT + state.itemsRedeemed.toNumber();
-  fakeNumber = (fakeNumber >= itemsAvailable) ? itemsAvailable : fakeNumber;
-  const itemsRedeemed = fakeNumber;
+  const itemsRedeemed = (state.itemsRedeemed.toNumber() >= itemsAvailable) ? itemsAvailable : state.itemsRedeemed.toNumber();
   const itemsRemaining = itemsAvailable - itemsRedeemed;
 
   const presale =

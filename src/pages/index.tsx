@@ -100,7 +100,7 @@ const Home = (props: HomeProps) => {
     return true;
   }
 
-  const checkMintLimt = () => {
+  const checkMintLimit = () => {
     if (OWNER_WALLET == wallet.publicKey?.toBase58()) {
       return true;
     }
@@ -113,8 +113,8 @@ const Home = (props: HomeProps) => {
   }
 
   const onMint = async (quantity: number) => {
-    if (!checkMintLimt()) {
-      toast.error('Public mint is stopped for now. Stay tunned.');
+    if (!checkMintLimit()) {
+      toast.error('Oops! Sold out');
       return;
     }
 

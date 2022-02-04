@@ -2,7 +2,6 @@ export const COLLECTION_SYMBOL = "Gorilla";
 export const MAX_HOLD_COUNT_OG = 3;
 export const MAX_HOLD_COUNT_WL = 2;
 export const MAX_HOLD_COUNT_PB = 3;
-export const AIRDROP_COUNT = 156;
 export const OWNER_WALLET = 'HWhAh2G3uDGa3PuN35o1VLvdhNwG9y5UgzgPWNFgEgeR';
 
 export const STAKE_STATUS = {
