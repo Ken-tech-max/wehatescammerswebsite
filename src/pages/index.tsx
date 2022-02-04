@@ -304,9 +304,9 @@ const Home = (props: HomeProps) => {
               <>
                 {candyMachine && 
                   <>
-                    <div className="text-center text-white">
+                    {/* <div className="text-center text-white">
                       Minted / Total {`${candyMachine?.state.itemsRedeemed} / ${candyMachine?.state.itemsAvailable}`}
-                    </div>
+                    </div> */}
                     <div className="text-center text-white">
                       Price {getMintPrice(candyMachine)} SOL
                     </div>
