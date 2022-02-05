@@ -16,7 +16,7 @@ const Stake = () => {
     const [visibleWalletNftDialog, setVisibleWalletNftDialog] = useState(false);
     const wallet = useWallet();
     const { isLoadingWalletNfts, walletNfts, setWalletNfts } = useWalletNfts();
-    const { isLoading, poolData, stakedNfts, claimAmount, stakeNft, unstakeNft, claimRewards } = useNftStake();
+    const { isLoading, poolData, stakedNfts, claimAmount, stakeNfts, unstakeNft, claimRewards } = useNftStake();
     const cancelButtonRef = useRef(null);
 
     const handleStakeNfts = async () => {
@@ -28,10 +28,12 @@ const Stake = () => {
 
         setVisibleWalletNftDialog(false);
 
+        let mints = [];
         for (let i = 0; i < selectedNfts.length; i++) {
             const nft = selectedNfts[i];
-            await stakeNft(nft.address);
+            mints.push(nft.address);
         }
+        await stakeNfts(mints);
     }
 
     const handleSelectUnstakeNft = (index: number) => {
@@ -104,7 +106,7 @@ const Stake = () => {
                     }
                 </div>
 
-                <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Stake a gorilla:</h3>
+                <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Stake Gorillas:</h3>
 
                 <div className="w-full flex justify-center items-center">
                     <button className="button-connect" onClick={() => handleStakeButton()}>STAKE</button>
@@ -113,7 +115,10 @@ const Stake = () => {
                 <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Staking Rewards:</h3>
 
                 <div className="w-full flex flex-col justify-center items-center">
-                    <p className="text-color-theme text-center font-amiga mb-5">{claimAmount} $GLUE</p>
+                    <div className="flex flex-row justify-center items-center space-x-5 mb-5">
+                        <img src={'/images/glue.png'} width={40} height={40} className="rounded-lg	 overflow-hidden" />
+                        <p className="text-color-theme text-center font-amiga">&times; {claimAmount} ($GLUE)</p>
+                    </div>
                     <button className="button-connect" onClick={() => handleClaim()}>CLAIM</button>
                 </div>
 
@@ -162,7 +167,7 @@ const Stake = () => {
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            If you stake your Gorilla, you can earn 10 $GLUE tokens for each Gorilla everyday during staked(Max: 7 days).
+                                            If you stake your Gorilla, you can earn 10 $GLUE tokens for each Gorilla everyday during staked(Max: 14 days).
                                         </p>
                                         <div className="w-full flex justify-center items-center">
                                         {

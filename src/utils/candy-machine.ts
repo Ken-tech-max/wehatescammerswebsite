@@ -1,7 +1,7 @@
 import * as anchor from '@project-serum/anchor';
 
 import { MintLayout, TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
-import { LAMPORTS_PER_SOL, SystemProgram } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL, PublicKey, SystemProgram } from '@solana/web3.js';
 import { sendTransactions } from './connection';
 import { programs } from '@metaplex/js';
 const { metadata: { Metadata, MetadataProgram } } = programs;
@@ -714,7 +714,7 @@ export async function getNftsForOwner(connection: anchor.web3.Connection, ownerA
       const tokenAmount = tokenAccount.account.data.parsed.info.tokenAmount;
 
       if (tokenAmount.amount == "1" && tokenAmount.decimals == "0") {
-
+        let nftMint = new PublicKey(tokenAccount.account.data.parsed.info.mint);
         let [pda] = await anchor.web3.PublicKey.findProgramAddress([
           Buffer.from("metadata"),
           TOKEN_METADATA_PROGRAM_ID.toBuffer(),
@@ -726,7 +726,7 @@ export async function getNftsForOwner(connection: anchor.web3.Connection, ownerA
         if (metadata.data.data.symbol == COLLECTION_SYMBOL) {
           const { data }: any = await axios.get(metadata.data.data.uri)
           const entireData = { ...data, id: Number(data.name.replace( /^\D+/g, '').split(' - ')[0]) }
-          allTokens.push({ ...entireData });
+          allTokens.push({ address : nftMint, ...entireData });
         }
       }
     }

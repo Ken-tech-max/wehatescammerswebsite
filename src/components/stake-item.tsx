@@ -8,7 +8,7 @@ const StakeItem = ({image, name, checked, type, nft, poolData, handleButton}: an
   const [isRedeemalbe, setRedeemable] = useState(false);
   let redeemableDate = new Date();
   if (type == STAKE_STATUS.STAKED) {
-    redeemableDate = new Date(nft.stakeTime * 1000 + poolData.withdrawable * 24 * 3600 * 1000);
+    redeemableDate = new Date(nft.stakeTime * 1000 + poolData.withdrawable * poolData.period * 1000);
   }
   
   return <div className={`mx-2 md:mx-5 col-span-1 ${checked ? "border-4 border-purple-800" : "border border-gray-500"} rounded-lg overflow-hidden`}>

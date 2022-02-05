@@ -72,7 +72,7 @@ const sendTransaction = async (transaction : Transaction, signers : Keypair[], w
         toast.success('Transaction succeed.');
     } catch(err) {
         console.log(err);
-        toast.error('Transaction failed. Please try again.');
+        toast.error('Transaction failed.');
     }
 }
 
@@ -193,50 +193,57 @@ const getClaimAmount = async (wallet: AnchorWallet) => {
                 }
             }
         ]
-    })
+    });
+
     let claimAmount = 0;
     const poolData: any = await getPoolData(wallet);
   
     for(let stakeAccount of resp){
         let stakedNft = await program.account.stakeData.fetch(stakeAccount.pubkey);
-        let num = (moment().unix() - stakedNft.stakeTime.toNumber()) / poolData.period;
+        let num = Math.floor((moment().unix() - stakedNft.stakeTime.toNumber()) / poolData.period);
         if(num > poolData.withdrawable) num = poolData.withdrawable;
         claimAmount += poolData.rewardAmount * (num - stakedNft.withdrawnNumber);
     }
-  
+
+    if (claimAmount <= 0) {
+        claimAmount = 0;
+    }
     return claimAmount;
 }
 
-const stake = async (nftMint : PublicKey, wallet: AnchorWallet) => {
+const stake = async (nftMints : Array<PublicKey>, wallet: AnchorWallet) => {
 	let provider = new anchor.Provider(connection, wallet, confirmOption);
     let program = new anchor.Program(idl,programId, provider);
-    const stakeData = Keypair.generate();
-    const metadata = await getMetadata(nftMint);
-    const sourceNftAccount = await getTokenWallet(wallet.publicKey, nftMint);
-    const destNftAccount = await getTokenWallet(pool, nftMint);
-    let transaction = new Transaction();
+    let transactions = new Transaction();
     let signers : Keypair[] = [];
-    signers.push(stakeData);
 
-    if((await connection.getAccountInfo(destNftAccount)) == null)
-        transaction.add(createAssociatedTokenAccountInstruction(destNftAccount, wallet.publicKey, pool, nftMint))
-    transaction.add(
-        await program.instruction.stake({
-            accounts: {
-                owner : wallet.publicKey,
-                pool : pool,
-                stakeData : stakeData.publicKey,
-                nftMint : nftMint,
-                metadata : metadata,
-                sourceNftAccount : sourceNftAccount,
-                destNftAccount : destNftAccount,
-                tokenProgram : TOKEN_PROGRAM_ID,
-                systemProgram : anchor.web3.SystemProgram.programId,
-                clock : SYSVAR_CLOCK_PUBKEY
-            }
-        })
-    );
-    await sendTransaction(transaction, signers, wallet);
+    for (let nftMint of nftMints) {
+        const stakeData = Keypair.generate();
+        const metadata = await getMetadata(nftMint);
+        const sourceNftAccount = await getTokenWallet(wallet.publicKey, nftMint);
+        const destNftAccount = await getTokenWallet(pool, nftMint);
+        signers.push(stakeData);
+
+        if((await connection.getAccountInfo(destNftAccount)) == null)
+            transactions.add(createAssociatedTokenAccountInstruction(destNftAccount, wallet.publicKey, pool, nftMint))
+        transactions.add(
+            await program.instruction.stake({
+                accounts: {
+                    owner : wallet.publicKey,
+                    pool : pool,
+                    stakeData : stakeData.publicKey,
+                    nftMint : nftMint,
+                    metadata : metadata,
+                    sourceNftAccount : sourceNftAccount,
+                    destNftAccount : destNftAccount,
+                    tokenProgram : TOKEN_PROGRAM_ID,
+                    systemProgram : anchor.web3.SystemProgram.programId,
+                    clock : SYSVAR_CLOCK_PUBKEY
+                }
+            })
+        );
+    }
+    await sendTransaction(transactions, signers, wallet);
 }
 
 const unstake = async (stakeData : PublicKey, wallet : AnchorWallet) => {
@@ -341,7 +348,7 @@ const useNftStake = () => {
             setPoolData(poolDataForOwner);
             const stakedNftsForOwner = await getStakedNftsForOwner(anchorWallet);
             setStakedNfts(stakedNftsForOwner);
-            const claimAmountForOwner = Math.floor(await getClaimAmount(anchorWallet));
+            const claimAmountForOwner = await getClaimAmount(anchorWallet);
             setClaimAmount(claimAmountForOwner);
             setIsLoading(false);
         })();
@@ -352,7 +359,7 @@ const useNftStake = () => {
         setBalance(balance / LAMPORTS_PER_SOL);
     }
 
-    const stakeNft = async (nftMint : PublicKey) => {
+    const stakeNfts = async (nftMints : Array<PublicKey>) => {
         if (!anchorWallet) {
             toast.error('Connect wallet first, please.');
             return;
@@ -360,7 +367,7 @@ const useNftStake = () => {
 
         setIsLoading(true);
 
-        await stake(nftMint, anchorWallet);
+        await stake(nftMints, anchorWallet);
         await updateBalance(anchorWallet);
 
         setIsLoading(false);
@@ -388,13 +395,20 @@ const useNftStake = () => {
 
         setIsLoading(true);
 
+        const claimAmount = await getClaimAmount(anchorWallet);
+        if (claimAmount == 0) {
+            setIsLoading(false);
+            toast.error('You have no claimable $GLUE.');
+            return;
+        }
+
         await claim(anchorWallet);
         await updateBalance(anchorWallet);
 
         setIsLoading(false);
     }
 
-    return { isLoading, poolData, stakedNfts, claimAmount, stakeNft, unstakeNft, claimRewards };
+    return { isLoading, poolData, stakedNfts, claimAmount, stakeNfts, unstakeNft, claimRewards };
 }
 
 export default useNftStake;

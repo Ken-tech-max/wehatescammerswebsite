@@ -8,7 +8,7 @@ export const STAKE_STATUS = {
     UNSTAKED:   0,
     STAKED:     1,
 };
-export const STAKE_DATA_SIZE = 8 + 1 + 32 + 32 + 32 +8 + 1;
+export const STAKE_DATA_SIZE = 8 + 1 + 32 + 32 + 32 + 8 + 1;
 
 export const STAKE_CONTRACT_IDL = 
 {
@@ -54,6 +54,54 @@ export const STAKE_CONTRACT_IDL =
           "name": "bump",
           "type": "u8"
         },
+        {
+          "name": "rewardAmount",
+          "type": "u64"
+        },
+        {
+          "name": "period",
+          "type": "i64"
+        },
+        {
+          "name": "withdrawable",
+          "type": "u8"
+        },
+        {
+          "name": "stakeCollection",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "updatePool",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
         {
           "name": "rewardAmount",
           "type": "u64"
