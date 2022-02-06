@@ -72,7 +72,7 @@ const Stake = () => {
             <Toaster />
             <Head>
                 <title>Gorilla Galaxy</title>
-                <meta name="description" content="Genesis is a collection of 2,222 unique, randomly generated Gorillas roaming on the Solana blockchain." />
+                <meta name="description" content="Genesis is a collection of 777 unique, randomly generated Gorillas roaming on the Solana blockchain." />
                 <link rel="icon" href="/icon.png" />
             </Head>
     
@@ -102,7 +102,7 @@ const Stake = () => {
                             }
                             </div>
                         :
-                            <p className="text-color-theme text-center font-amiga mb-5">You didn't stake any Gorillas.</p>
+                            <p className="text-color-theme text-center font-amiga mb-5">You haven't staked any Gorillas.</p>
                     }
                 </div>
 
@@ -167,7 +167,7 @@ const Stake = () => {
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            If you stake your Gorilla, you can earn 10 $GLUE tokens for each Gorilla everyday during staked(Max: 14 days).
+                                            For each Gorilla staked you will receive 10 GLUE tokens per day during the 14 day staking period.
                                         </p>
                                         <div className="w-full flex justify-center items-center">
                                         {
