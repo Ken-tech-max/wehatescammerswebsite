@@ -28,6 +28,11 @@ const Stake = () => {
 
         setVisibleWalletNftDialog(false);
 
+        if (selectedNfts.length > 2) {
+            toast.error("You can stake 2 Gorilla at once.");
+            return;
+        }
+
         let mints = [];
         for (let i = 0; i < selectedNfts.length; i++) {
             const nft = selectedNfts[i];
