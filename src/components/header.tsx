@@ -107,7 +107,6 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
             STAKE
           </button>
         </Link> */}
-
         <div className="grid grid-cols-6 gap-6 pt-5">
           <div className="col-span-1"></div>
           <div className="col-span-1"></div>
