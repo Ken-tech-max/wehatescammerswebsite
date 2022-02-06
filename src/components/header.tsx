@@ -58,12 +58,12 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
               <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" >
                 STORE
               </button>
-            </Link>
+            </Link> */}
             <Link href="/stake">
               <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" >
                 STAKE
               </button>
-            </Link> */}
+            </Link>
           </div>
           <WalletMultiButton className="button-connect" />
           {/* <button className="button-connect">Connect Wallet</button> */}
@@ -101,12 +101,12 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
           <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => handleClickMenu()} >
             STORE
           </button>
-        </Link>
+        </Link> */}
         <Link href="/stake">
           <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => handleClickMenu()} >
             STAKE
           </button>
-        </Link> */}
+        </Link>
         <div className="grid grid-cols-6 gap-6 pt-5">
           <div className="col-span-1"></div>
           <div className="col-span-1"></div>
