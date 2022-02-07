@@ -6,6 +6,7 @@ import { sendTransactions } from './connection';
 import { programs } from '@metaplex/js';
 const { metadata: { Metadata, MetadataProgram } } = programs;
 import axios from "axios";
+import bs58 from 'bs58';
 
 import {
   CIVIC,
@@ -14,9 +15,9 @@ import {
   getNetworkToken,
   SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
 } from './util';
-import { COLLECTION_SYMBOL } from './constant';
+import { COLLECTION_SYMBOL, CREATOR_ARRAY_START, MAX_METADATA_LEN } from './constant';
 
-export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
+const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
   'cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ',
 );
 
@@ -702,19 +703,53 @@ const sleep = (ms: number): Promise<void> => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
+async function fetchHashTable(connection: anchor.web3.Connection, firstCreatorAddress: anchor.web3.PublicKey) {
+  const metadataAccounts = await connection.getProgramAccounts(
+      TOKEN_METADATA_PROGRAM_ID,
+      {
+        // The mint address is located at byte 33 and lasts for 32 bytes.
+        dataSlice: { offset: 33, length: 32 },
+
+        filters: [
+          // Only get Metadata accounts.
+          { dataSize: MAX_METADATA_LEN },
+
+          // Filter using the first creator.
+          {
+            memcmp: {
+              offset: CREATOR_ARRAY_START,
+              bytes: firstCreatorAddress.toBase58(),
+            },
+          },
+        ],
+      },
+  );
+
+  return metadataAccounts.map((metadataAccountInfo) => (
+      bs58.encode(metadataAccountInfo.account.data)
+  ));
+};
+
 export async function getNftsForOwner(connection: anchor.web3.Connection, ownerAddress: anchor.web3.PublicKey) {
   const allTokens: any = [];
   try {
+    // const candyMachineId = new anchor.web3.PublicKey(
+    //   process.env.NEXT_PUBLIC_CANDY_MACHINE_ID!,
+    // );
+    // const candyMachineCreator = await getCandyMachineCreator(candyMachineId);
+    // const mintHashes = await fetchHashTable(connection, candyMachineCreator[0]);
+
     const tokenAccounts = await connection.getParsedTokenAccountsByOwner(ownerAddress, {
       programId: TOKEN_PROGRAM_ID
     });
 
     for (let index = 0; index < tokenAccounts.value.length; index++) {
       const tokenAccount = tokenAccounts.value[index];
+      let nftMint = new PublicKey(tokenAccount.account.data.parsed.info.mint);
       const tokenAmount = tokenAccount.account.data.parsed.info.tokenAmount;
 
       if (tokenAmount.amount == "1" && tokenAmount.decimals == "0") {
-        let nftMint = new PublicKey(tokenAccount.account.data.parsed.info.mint);
+      // if (mintHashes.includes(nftMint.toBase58())) {
         let [pda] = await anchor.web3.PublicKey.findProgramAddress([
           Buffer.from("metadata"),
           TOKEN_METADATA_PROGRAM_ID.toBuffer(),

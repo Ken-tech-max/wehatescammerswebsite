@@ -4,6 +4,15 @@ export const MAX_HOLD_COUNT_WL = 2;
 export const MAX_HOLD_COUNT_PB = 3;
 export const OWNER_WALLET = 'HWhAh2G3uDGa3PuN35o1VLvdhNwG9y5UgzgPWNFgEgeR';
 
+export const MAX_NAME_LENGTH = 32;
+export const MAX_URI_LENGTH = 200;
+export const MAX_SYMBOL_LENGTH = 10;
+export const MAX_CREATOR_LEN = 32 + 1 + 1;
+export const MAX_CREATOR_LIMIT = 5;
+export const MAX_DATA_SIZE = 4 + MAX_NAME_LENGTH + 4 + MAX_SYMBOL_LENGTH + 4 + MAX_URI_LENGTH + 2 + 1 + 4 + MAX_CREATOR_LIMIT * MAX_CREATOR_LEN;
+export const MAX_METADATA_LEN = 1 + 32 + 32 + MAX_DATA_SIZE + 1 + 1 + 9 + 172;
+export const CREATOR_ARRAY_START = 1 + 32 + 32 + 4 + MAX_NAME_LENGTH + 4 + MAX_URI_LENGTH + 4 + MAX_SYMBOL_LENGTH + 2 + 1 + 4;
+
 export const STAKE_STATUS = {
     UNSTAKED:   0,
     STAKED:     1,
