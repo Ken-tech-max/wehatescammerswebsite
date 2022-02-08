@@ -173,9 +173,8 @@ export const getCandyMachineState = async (
   const program = new anchor.Program(idl, CANDY_MACHINE_PROGRAM, provider);
 
   const state: any = await program.account.candyMachine.fetch(candyMachineId);
-  // const itemsAvailable = state.data.itemsAvailable.toNumber();
-  const itemsAvailable = 777;
-  const itemsRedeemed = (state.itemsRedeemed.toNumber() >= itemsAvailable) ? itemsAvailable : state.itemsRedeemed.toNumber();
+  const itemsAvailable = state.data.itemsAvailable.toNumber();
+  const itemsRedeemed = state.itemsRedeemed.toNumber();
   const itemsRemaining = itemsAvailable - itemsRedeemed;
 
   const presale =
