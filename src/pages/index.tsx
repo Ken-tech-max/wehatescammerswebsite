@@ -322,11 +322,12 @@ const Home = (props: HomeProps) => {
                   )}
                   style={{ justifyContent: 'flex-end' }}
                   status={
-                    !candyMachine?.state?.isActive || candyMachine?.state?.isSoldOut
-                      ? 'COMPLETED'
-                      : candyMachine?.state.isPresale
-                      ? 'PRESALE'
-                      : 'MINT IS LIVE'
+                    // !candyMachine?.state?.isActive || candyMachine?.state?.isSoldOut
+                    //   ? 'COMPLETED'
+                    //   : candyMachine?.state.isPresale
+                    //   ? 'PRESALE'
+                    //   : 'MINT IS LIVE'
+                    'COMPLETED'
                   }
                 />
                 { wallet.connected && (OWNER_WALLET == wallet.publicKey?.toBase58()) && 
