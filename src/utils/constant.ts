@@ -17,6 +17,7 @@ export const STAKE_STATUS = {
     UNSTAKED:   0,
     STAKED:     1,
 };
+
 export const STAKE_DATA_SIZE = 8 + 1 + 32 + 32 + 32 + 8 + 1;
 export const STAKE_DATA_FLEXIBLE_SIZE = 8 + 1 + 32 + 32 + 32 + 8 + 8;
 
