@@ -111,11 +111,11 @@ const Stake = () => {
                     }
                 </div>
 
-                <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Stake Gorillas:</h3>
+                {/* <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Stake Gorillas:</h3>
 
                 <div className="w-full flex justify-center items-center">
                     <button className="button-connect" onClick={() => handleStakeButton()}>STAKE</button>
-                </div>
+                </div> */}
 
                 <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Staking Rewards:</h3>
 

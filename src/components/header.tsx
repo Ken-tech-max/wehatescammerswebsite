@@ -64,6 +64,11 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
                 STAKE
               </button>
             </Link>
+            <Link href="/flexible-stake">
+              <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none font-amiga" >
+                STAKE 2.0
+              </button>
+            </Link>
           </div>
           <WalletMultiButton className="button-connect" />
           {/* <button className="button-connect">Connect Wallet</button> */}
@@ -105,6 +110,11 @@ const Header = ({mintRef, aboutRef, teamRef, roadmapRef, faqRef}: any) => {
         <Link href="/stake">
           <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => handleClickMenu()} >
             STAKE
+          </button>
+        </Link>
+        <Link href="/flexible-stake">
+          <button className="outline-none bg-transprent theme-header-link text-white uppercase focus:outline-none header-menu-item font-amiga" onClick={() => handleClickMenu()} >
+            STAKE 2.0
           </button>
         </Link>
         <div className="grid grid-cols-6 gap-6 pt-5">
