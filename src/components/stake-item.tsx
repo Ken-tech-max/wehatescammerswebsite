@@ -22,7 +22,7 @@ const StakeItem = ({image, name, checked, type, nft, poolData, handleButton}: an
         <>
           {
             isRedeemalbe ?
-              <button className="button-stake" onClick={() => handleButton(nft)}>Redeem</button>
+              <button className="button-stake" onClick={() => handleButton(nft)}>Unstake</button>
             :
               <Countdown
                 date={redeemableDate}

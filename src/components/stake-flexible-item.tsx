@@ -11,7 +11,7 @@ const StakeFlexibleItem = ({image, name, checked, type, nft, poolData, handleBut
       <p className="text-center text-white p-2 border-t border-gray-500"><span className="text-color-theme font-amiga">{name}</span></p>
       {
         type == STAKE_STATUS.STAKED && 
-        <button className="button-stake" onClick={() => handleButton(nft)}>Redeem</button>
+        <button className="button-stake" onClick={() => handleButton(nft)}>Unstake</button>
       }
     </div>
   </div>;
