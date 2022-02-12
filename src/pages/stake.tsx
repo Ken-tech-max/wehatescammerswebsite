@@ -117,7 +117,7 @@ const Stake = () => {
                     <button className="button-connect" onClick={() => handleStakeButton()}>STAKE</button>
                 </div> */}
 
-                <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Staking Rewards:</h3>
+                {/* <h3 className="text-white text-center presale-title drop-shadow-lg py-10">Staking Rewards:</h3>
 
                 <div className="w-full flex flex-col justify-center items-center">
                     <div className="flex flex-row justify-center items-center space-x-5 mb-5">
@@ -127,7 +127,7 @@ const Stake = () => {
                     <button className="button-connect" onClick={() => handleClaim()}>CLAIM</button>
                 </div>
 
-                <br />
+                <br /> */}
             </section>
             :
             <section>
