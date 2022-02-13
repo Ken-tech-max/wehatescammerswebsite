@@ -246,12 +246,15 @@ const stake = async (nftMints : Array<PublicKey>, wallet: AnchorWallet) => {
 
 const unstake = async (stakeData : PublicKey, wallet : AnchorWallet) => {
     let provider = new anchor.Provider(connection, wallet, confirmOption);
-    let program = new anchor.Program(idl,programId,provider);
+    let program = new anchor.Program(idl,programId, provider);
     let stakedNft = await program.account.stakeData.fetch(stakeData);
     let account = await connection.getAccountInfo(stakedNft.account);
     let mint = new PublicKey(AccountLayout.decode(account!.data).mint);
-    const destNftAccount = await getTokenWallet(wallet.publicKey,mint);
+    const destNftAccount = await getTokenWallet(wallet.publicKey, mint);
     let transaction = new Transaction();
+
+    if ((await connection.getAccountInfo(destNftAccount)) == null)
+        transaction.add(createAssociatedTokenAccountInstruction(destNftAccount, wallet.publicKey, wallet.publicKey, mint));
   
     transaction.add(
       await program.instruction.unstake({
