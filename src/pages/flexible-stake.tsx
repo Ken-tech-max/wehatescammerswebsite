@@ -172,7 +172,7 @@ const FlexibleStake = () => {
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            For each Gorilla staked you will receive 2 GLUE tokens per 2.4 hour staking period.
+                                            For each Gorilla staked you will receive 1 GLUE token per 2.4 hour staking period.
                                         </p>
                                         <div className="w-full flex justify-center items-center">
                                         {
