@@ -197,8 +197,9 @@ const getClaimAmount = async (wallet: AnchorWallet) => {
     let claimAmount = 0;
     const poolData: any = await getPoolData(wallet);
   
-    for(let stakeAccount of resp){
+    for(let stakeAccount of resp) {
         let stakedNft = await program.account.stakeData.fetch(stakeAccount.pubkey);
+        if (stakedNft.unstaked) continue;
         let num = Math.floor((moment().unix() - stakedNft.stakeTime.toNumber()) / poolData.period);
         claimAmount += poolData.rewardAmount * (num - stakedNft.withdrawnNumber.toNumber());
     }
@@ -304,6 +305,8 @@ async function claim(wallet : AnchorWallet) {
     if((await connection.getAccountInfo(destRewardAccount)) == null)
         transaction.add(createAssociatedTokenAccountInstruction(destRewardAccount,wallet.publicKey,wallet.publicKey, poolData.rewardMint))  
     for(let stakeAccount of resp) {
+        let stakedNft = await program.account.stakeData.fetch(stakeAccount.pubkey);
+        if (stakedNft.unstaked) continue;
         transaction.add(
             await program.instruction.claim({
                 accounts:{
