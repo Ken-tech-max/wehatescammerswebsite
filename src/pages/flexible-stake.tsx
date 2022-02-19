@@ -107,7 +107,7 @@ const FlexibleStake = () => {
                             }
                             </div>
                         :
-                            <p className="text-color-theme text-center font-amiga mb-5">You haven't staked any Gorillas.</p>
+                            <p className="text-color-theme text-center font-amiga mb-5">You have not staked any Gorillas.</p>
                     }
                 </div>
 
