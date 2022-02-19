@@ -165,7 +165,7 @@ const Home = (props: HomeProps) => {
           message = `SOLD OUT!`;
           window.location.reload();
         } else if (error.code === 312) {
-          message = `Minting period has not started yet.`;
+          message = `Minting period hasn't started yet.`;
         }
       }
 
@@ -228,7 +228,7 @@ const Home = (props: HomeProps) => {
           message = `SOLD OUT!`;
           window.location.reload();
         } else if (error.code === 312) {
-          message = `Minting period has not started yet.`;
+          message = `Minting period hasn't started yet.`;
         }
       }
 
@@ -372,7 +372,7 @@ const Home = (props: HomeProps) => {
                 Every Genesis Gorilla is unique and programmatically generated from over 130+ possible attributes and traits like background, fur, clothes, mouth, head, earrings and eyes. Some gorillas will be rarer than others. 
                 <br />
                 <br />
-                Your genesis gorilla is not just a cool picture. It is your ticket into our ecosystem, bringing you value in the real and digital world.
+                Your genesis gorilla isn't just a cool picture. It is your ticket into our ecosystem, bringing you value in the real and digital world.
               </div>
             </div>
             <div className="w-full md:w-1/2 relative">
@@ -539,7 +539,7 @@ const Home = (props: HomeProps) => {
               <img src={'/images/team1.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5 mb-3">
                 <h5 className="text-color-theme text-center team-title">Non-Fungibro</h5>
-                <a href="https://twitter.com/NonFungibro?s=21" target="_blank" rel="noreferrer">
+                <a href="https://twitter.com/NonFungibro?s=21" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
                 </a>
               </div>
@@ -550,7 +550,7 @@ const Home = (props: HomeProps) => {
               <img src={'/images/team2.png'} width={"80%"} />
               <div className="flex flex-row justify-center items-center space-x-4 mt-5 mb-3">
                 <h5 className="text-color-theme text-center team-title">CDZ</h5>
-                <a href="https://twitter.com/cdz999" target="_blank" rel="noreferrer">
+                <a href="https://twitter.com/cdz999" target="_blank">
                   <img src={'/images/icon_twitter.png'} width={30} height={30} />
                 </a>
               </div>
@@ -569,7 +569,7 @@ const Home = (props: HomeProps) => {
             <div className="w-full flex justify-center items-center">
               <Link href="/"><img src={'/images/logo.png'} width={200} className="cursor-pointer" /></Link>
             </div>
-            <a href="https://discord.gg/GZpTs7pG27" target="_blank" rel="noreferrer">
+            <a href="https://discord.gg/GZpTs7pG27" target="_blank">
               <button className="button-connect">JOIN OUR DISCORD</button>
             </a>
           </div>
